@@ -1,0 +1,115 @@
+#jinja2: trim_blocks:False
+---
+# log_level for the Snap daemon. Supported values are
+# 1 - Debug, 2 - Info, 3 - Warning, 4 - Error, 5 - Fatal.
+# Default value is 3.
+log_level: {{ log_level }}
+log_path: {{ log_path }}
+log_format: text
+
+control:
+  # Configuration auto_discover_path sets the directory(s) to auto load plugins and tasks on
+  # the start of the snap daemon. This can be a colon separated list of directories.
+  auto_discover_path: /opt/appoptics/autoload
+
+  # Configuration plugin_trust_level sets the plugin trust level for snapteld. The default state
+  # for plugin trust level is enabled (1). When enabled, only signed plugins that can
+  # be verified will be loaded into snapteld. Signatures are verified from
+  # keyring files specified in keyring_path. Plugin trust can be disabled (0) which
+  # will allow loading of all plugins whether signed or not. The warning state allows
+  # for loading of signed and unsigned plugins. Warning messages will be displayed if
+  # an unsigned plugin is loaded. Any signed plugins that cannot be verified will
+  # not be loaded. Valid values are 0 - Off, 1 - Enabled, 2 - Warning
+  plugin_trust_level: 0
+
+  # Configuration plugin_load_timeout sets the maximal time allowed for a plugin to load.
+  # Some plugins may require more time to initialize.
+  # Default value is 5
+  plugin_load_timeout: 15
+
+  # The bind address and port the agent uses to control and receive data from plugins.
+  # The default address is 127.0.0.1 and the default port is 21413.
+  listen_addr: "{{ listen_addr }}"
+  listen_port: {{ listen_port }}
+
+  # Configuration temp_dir_path sets the temporary directory which houses the temporary files
+  temp_dir_path: {{ temp_dir_path }}
+
+  # temp_dir_enable sets whether the application startup leverage the `temp_path_dir` to start
+  # plugins. The use of the temporary location is considered legacy functionality, so
+  # set this boolean to `true` if you'd like to use it
+  temp_dir_enable: {{ temp_dir_enable }}
+
+  # Search path for load: directives in plugin configuration
+  plugin_path: {{ plugin_path }}
+  task_path: {{ task_path }}
+
+  # Plugins section contains plugin config settings that will be applied for plugins across tasks.
+  plugins:
+    include: /opt/appoptics/etc/plugins.d
+    publisher:
+      publisher-appoptics:
+        all:
+          token: "{{ appoptics_token }}"
+          url: "https://api.appoptics.com/v1/measurements"
+          # Set this option if you want a different "host" tag to be associated with the metrics you report.
+          {% if hostname_aliast is defined %}
+          hostname_alias: {{ hostname_alias }}
+          {% else %}
+          # hostname_alias: myhostname
+          {% endif %}
+          #
+          # Enable support for HTTP proxy.
+          {% if http_proxy %}
+          proxy_url: {{ http_proxy_url }}
+            {% if authenticate_http_proxy %}
+          proxy_user: {{ http_proxy_user }}
+          proxy_password: {{ http_proxy_password }}
+            {% endif %}
+          {% else %}
+          # proxy_url: "http://<proxy-server-ip>:<port>"
+          # When HTTP proxy requires user authentication, uncomment the following lines and update username and password.
+          # proxy_user:<username>
+          # proxy_password:<password>
+          {% endif %}
+          #
+          # Enable support for SOCKS5 proxy. Only SOCKS5 proxies are supported at this time.
+          {% if socks_proxy %}
+          proxy_url: {{ socks_proxy_url }}
+            {% if authenticate_socks_proxy %}
+          proxy_user: {{ socks_proxy_user }}
+          proxy_password: {{ socks_proxy_password }}
+            {% endif %}
+          {% else %}
+          # When SOCKS5 proxy requires user authentication, uncomment the following lines and update username and password.
+          # proxy_url: "socks5://<proxy-server-ip>:<port>"
+          # proxy_user:<username>
+          # proxy_password:<password>
+          {% endif %}
+          # grpc_timeout sets the maximum time allowed for a gRPC call.
+          # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
+          # When grpc_timeout is increased, then the deadline specified in manifest task file should also be increased to allow
+          # more time for the task to finish all associated jobs. The deadline specifies the maximum time allowed to finish all
+          # the associated task's jobs (like collection and publishing of the metrics) which now can take longer.
+          # Default value is 10
+          grpc_timeout: {{ publisher_grpc_timeout }}
+
+    collector:
+      aosystem:
+        all:
+          # grpc_timeout sets the maximum time allowed for a gRPC call.
+          # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
+          # When grpc_timeout is increased, then the deadline specified in manifest task file should also be increased to allow
+          # more time for the task to finish all associated jobs. The deadline specifies the maximum time allowed to finish all
+          # the associated task's jobs (like collection and publishing of the metrics) which now can take longer.
+          # Default value is 10
+          grpc_timeout: {{ aosystem_grpc_timeout }}
+
+  # Tags that will be applied to collected metrics across tasks.
+  tags:
+   # tags all metrics
+   #/:
+   #  environment: production
+   # tags a specific metric namespace
+   #/nginx:
+   #  site: mysite.com

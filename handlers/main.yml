@@ -1,0 +1,6 @@
+---
+- name: Restart snapteld
+  service:
+    name: appoptics-snapteld
+    state: restarted
+  become: yes

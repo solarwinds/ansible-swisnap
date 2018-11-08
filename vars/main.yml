@@ -1,0 +1,3 @@
+---
+repo_gpgkey: "https://packagecloud.io/AppOptics/appoptics-snap/gpgkey"
+package_name: appoptics-snaptel

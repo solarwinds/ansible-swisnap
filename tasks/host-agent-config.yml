@@ -1,0 +1,9 @@
+---
+- name: Insert AppOptics Token to Host Agent config file
+  template:
+    src: config.yaml.j2
+    dest: /opt/appoptics/etc/config.yaml
+    owner: appoptics
+    group: appoptics
+  notify: Restart snapteld
+  become: yes

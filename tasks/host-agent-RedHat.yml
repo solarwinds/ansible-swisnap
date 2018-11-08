@@ -1,0 +1,19 @@
+---
+- name: Set up package repository
+  yum_repository:
+    name: AppOptics_appoptics-snap
+    file: /etc/yum.repos.d/AppOptics_appoptics-snap
+    description: AppOptics Host Agent repository
+    baseurl: "{{ repo_baseurl }}"
+    gpgkey: "{{ repo_gpgkey }}"
+    gpgcheck: no
+    repo_gpgcheck: yes
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    metadata_expire: "{{ repo_metadata_expire }}"
+  become: yes
+
+- name: Install Host Agent dependencies
+  yum:
+    name: "{{ package_name }}"
+    state: present
+  become: yes

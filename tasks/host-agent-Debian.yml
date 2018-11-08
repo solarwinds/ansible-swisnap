@@ -1,0 +1,18 @@
+---
+- name: Set up package repository
+  apt_repository:
+    repo: "{{ appoptics_host_agent_deb_repo }}"
+    state: present
+  become: yes
+
+- name: Add repository gpg key
+  apt_key:
+    url: "{{ repo_gpgkey }}"
+    state: present
+  become: yes
+
+- name: Install Host Agent dependencies
+  apt:
+    name: "{{ package_name }}"
+    update_cache: yes
+  become: yes

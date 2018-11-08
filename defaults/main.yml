@@ -1,0 +1,25 @@
+---
+appoptics_token: ""
+log_level: 3
+log_path: /var/log/appoptics
+listen_addr: 127.0.0.1
+listen_port: 21414
+temp_dir_path: /tmp/appoptics-snaptel
+temp_dir_enable: false
+plugin_path: /opt/appoptics/bin
+task_path: /opt/appoptics/etc/tasks.d
+
+http_proxy: false
+http_proxy_url: ""
+authenticate_http_proxy: false
+http_proxy_user: ""
+http_proxy_password: ""
+
+socks_proxy: false
+socks_proxy_url: ""
+authenticate_socks_proxy: false
+socks_proxy_user: ""
+socks_proxy_password: ""
+
+publisher_grpc_timeout: 10
+aosystem_grpc_timeout: 10

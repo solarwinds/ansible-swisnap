@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Dawid Śmiech
+  description: AppOptics Host Agent Installer
+  company: SolarWinds, LLC
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Debian
+      versions:
+        - all
+  categories: monitoring
+
+dependencies: []
