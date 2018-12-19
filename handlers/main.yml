@@ -1,6 +1,9 @@
 ---
-- name: Restart snapteld
+- name: Restart Linux snapteld
   service:
     name: appoptics-snapteld
     state: restarted
   become: yes
+
+- name: Restart Windows snapteld
+  win_shell: '& "C:\Program Files\AppOptics\Snap\restart_appoptics_service.bat"'

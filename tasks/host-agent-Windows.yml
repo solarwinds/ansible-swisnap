@@ -1,0 +1,15 @@
+- name: Download AppOptics Host Agent installer
+  win_get_url:
+    url: "{{ host_agent_installer }}"
+    dest: "{{ win_installer_download_path }}"
+
+- name: Install AppOptics Host Agent
+  win_package:
+    path: "{{ win_installer_download_path }}"
+    product_id: "{{ host_agent_product_id }}"
+    arguments:
+      - /quiet
+      - /passive
+      - TOKEN={{ appoptics_token }}
+      - EULA=accept
+    state: present

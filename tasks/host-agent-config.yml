@@ -1,9 +1,17 @@
 ---
-- name: Insert AppOptics Token to Host Agent config file
+- name: Insert AppOptics Token to Host Agent config file (Linux)
   template:
     src: config.yaml.j2
     dest: /opt/appoptics/etc/config.yaml
     owner: appoptics
     group: appoptics
-  notify: Restart snapteld
+  notify: Restart Linux snapteld
   become: yes
+  when: ansible_os_family != "Windows"
+
+- name: Insert AppOptics Token to Host Agent config file (Windows)
+  win_template:
+    src: config.yaml.j2
+    dest: C:\ProgramData\AppOptics\Snap\config.yaml
+  notify: Restart Windows snapteld
+  when: ansible_os_family == "Windows"
