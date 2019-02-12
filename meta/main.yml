@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Dawid Śmiech
-  description: AppOptics Host Agent Installer
+  description: SolarWinds Snap Agent Installer
   company: SolarWinds, LLC
   license: MIT
   min_ansible_version: 2.1

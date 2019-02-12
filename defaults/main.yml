@@ -1,13 +1,13 @@
 ---
 appoptics_token: ""
 log_level: 3
-log_path: /var/log/appoptics
+log_path: /var/log/SolarWinds/Snap
 listen_addr: 127.0.0.1
 listen_port: 21414
-temp_dir_path: /tmp/appoptics-snaptel
+temp_dir_path: /tmp/SolarWinds/Snap
 temp_dir_enable: false
-plugin_path: /opt/appoptics/bin
-task_path: /opt/appoptics/etc/tasks.d
+plugin_path: /opt/SolarWinds/Snap/bin
+task_path: /opt/SolarWinds/Snap/etc/tasks.d
 
 http_proxy: false
 http_proxy_url: ""

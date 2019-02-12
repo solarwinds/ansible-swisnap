@@ -1,7 +1,7 @@
-# AppOptics Snap Ansible Role
+# SolarWinds Snap Agent Ansible Role
 
 
-Installs and configures AppOptics Snap on RHEL/CentOS, Debian/Ubuntu or Windows servers.
+Installs and configures SolarWinds Snap Agent on RHEL/CentOS, Debian/Ubuntu or Windows servers.
 
 ## Role Variables
 
@@ -14,7 +14,7 @@ AppOptics API [token](https://docs.appoptics.com/kb/user_org/tokens/#api-tokens-
 
 ```yaml
 log_level: 3
-log_path: /var/log/appoptics
+log_path: /var/log/SolarWinds/Snap
 ```
 Logging level and path to file.
 
@@ -22,22 +22,22 @@ Logging level and path to file.
 listen_addr: 127.0.0.1
 listen_port: 21414
 ```
-Address and port of running instance of AppOptics Host Agent.
+Address and port of running instance of SolarWinds Snap Agent.
 
 ```yaml
-temp_dir_path: /tmp/appoptics-snaptel
+temp_dir_path: /tmp/SolarWinds/Snap
 temp_dir_enable: false
 ```
 
 ```yaml
-plugin_path: /opt/appoptics/bin
+plugin_path: /opt/SolarWinds/Snap/bin
 ```
-Path where AppOptics Host Agent's plugins binaries are stored.
+Path where SolarWinds Snap Agent's plugins binaries are stored.
 
 ```yaml
-task_path: /opt/appoptics/etc/tasks.d
+task_path: /opt/SolarWinds/Snap/etc/tasks.d
 ```
-Path to AppOptics Host Agent's tasks files.
+Path to SolarWinds Snap Agent's tasks files.
 
 ```yaml
 http_proxy: false
@@ -64,7 +64,7 @@ OS-specific variables are stored in `vars/`. They're included in main task and, 
 
 ## Example Playbook
 
-To use AppOptics Snap Ansible Role clone this repository to directory with your playbook's roles. Usage together with `ansible-aosnap-modules`: [example](https://github.com/librato/ansible-aosnap-modules/blob/master/tests/main.yml)
+To use SolarWinds Snap Agent Ansible Role clone this repository to directory with your playbook's roles. Usage together with `ansible-swisnap-modules`: [example](https://github.com/librato/ansible-swisnap-modules/blob/master/tests/main.yml)
 
 ### Linux
 
@@ -74,7 +74,7 @@ To use AppOptics Snap Ansible Role clone this repository to directory with your 
   vars_files:
     - vars/my_vars.yaml
   roles:
-    - ansible-aosnap
+    - ansible-swisnap
 ```
 
 Inside `vars/my_vars.yaml`:
@@ -93,14 +93,14 @@ listen_port: 55555
   vars_files:
     - vars/main.yml
   roles:
-    - ansible-aosnap
+    - ansible-swisnap
 ```
 
 Inside `vars/my_vars.yaml`:
 
 ```yaml
 appoptics_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e
-installer_download_path: "C:\\Users\\Administrator\\Downloads\\appoptics_installer.msi"
+installer_download_path: "C:\\Users\\Administrator\\Downloads\\solarwinds-snap-agent-installer.msi"
 ```
 
 Inside `inventory`:

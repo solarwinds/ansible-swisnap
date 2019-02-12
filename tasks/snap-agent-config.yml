@@ -1,0 +1,17 @@
+---
+- name: Insert AppOptics Token to Snap Agent config file (Linux)
+  template:
+    src: config.yaml.j2
+    dest: /opt/SolarWinds/Snap/etc/config.yaml
+    owner: solarwinds
+    group: solarwinds
+  notify: Restart Linux service
+  become: yes
+  when: ansible_os_family != "Windows"
+
+- name: Insert AppOptics Token to Snap Agent config file (Windows)
+  win_template:
+    src: config.yaml.j2
+    dest: C:\ProgramData\SolarWinds\Snap\config.yaml
+  notify: Restart Windows service
+  when: ansible_os_family == "Windows"

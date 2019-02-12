@@ -1,9 +1,9 @@
 ---
 - name: Set up package repository
   yum_repository:
-    name: AppOptics_appoptics-snap
-    file: /etc/yum.repos.d/AppOptics_appoptics-snap
-    description: AppOptics Host Agent repository
+    name: SolarWinds_snap-agent
+    file: /etc/yum.repos.d/SolarWinds_snap-agent
+    description: SolarWinds Snap Agent repository
     baseurl: "{{ repo_baseurl }}"
     gpgkey: "{{ repo_gpgkey }}"
     gpgcheck: no
@@ -12,7 +12,7 @@
     metadata_expire: "{{ repo_metadata_expire }}"
   become: yes
 
-- name: Install Host Agent dependencies
+- name: Install Snap Agent dependencies
   yum:
     name: "{{ package_name }}"
     state: present

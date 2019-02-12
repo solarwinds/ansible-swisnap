@@ -2,8 +2,8 @@
 - name: Include OS specific variables
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Include OS specific Host Agent installation
-  include: host-agent-{{ ansible_os_family }}.yml
+- name: Include OS specific Snap Agent installation
+  include: snap-agent-{{ ansible_os_family }}.yml
 
 - name: Include Host Agent configuration
-  include: host-agent-config.yml
+  include: snap-agent-config.yml

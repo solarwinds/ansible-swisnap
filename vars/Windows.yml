@@ -1,3 +1,3 @@
-host_agent_installer: "https://files.appoptics.com/windows-host-agent/appoptics-snaptel.msi"
-host_agent_product_id: "{DA33CD5D-DFF1-4AC5-B170-34B7F13D0CB6}"
+snap_agent_installer: "https://files.solarwinds.com/solarwinds-snap-agent-installer.sh"
+snap_agent_product_id: "{DA33CD5D-DFF1-4AC5-B170-34B7F13D0CB6}"
 installer_download_path: ""

@@ -1,9 +1,9 @@
 ---
-- name: Restart Linux snapteld
+- name: Restart Linux service
   service:
-    name: appoptics-snapteld
+    name: swisnapd
     state: restarted
   become: yes
 
-- name: Restart Windows snapteld
-  win_shell: '& "C:\Program Files\AppOptics\Snap\restart_appoptics_service.bat"'
+- name: Restart Windows service
+  win_shell: '& "C:\Program Files\SolarWinds\Snap\restart_solarwinds_snap_agent_service.bat"'

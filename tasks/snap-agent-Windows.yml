@@ -1,12 +1,12 @@
-- name: Download AppOptics Host Agent installer
+- name: Download SolarWinds Snap Agent installer
   win_get_url:
-    url: "{{ host_agent_installer }}"
+    url: "{{ snap_agent_installer }}"
     dest: "{{ win_installer_download_path }}"
 
-- name: Install AppOptics Host Agent
+- name: Install SolarWinds Snap Agent
   win_package:
     path: "{{ win_installer_download_path }}"
-    product_id: "{{ host_agent_product_id }}"
+    product_id: "{{ snap_agent_product_id }}"
     arguments:
       - /quiet
       - /passive

@@ -1,2 +1,2 @@
 ---
-appoptics_host_agent_deb_repo: 'deb https://packagecloud.io/AppOptics/appoptics-snap/ubuntu/ trusty main'
+solarwinds_snap_agent_deb_repo: 'deb https://packagecloud.io/SolarWinds/snap-agent/ubuntu/ trusty main'

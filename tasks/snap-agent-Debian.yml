@@ -1,7 +1,7 @@
 ---
 - name: Set up package repository
   apt_repository:
-    repo: "{{ appoptics_host_agent_deb_repo }}"
+    repo: "{{ solarwinds_snap_agent_deb_repo }}"
     state: present
   become: yes
 
@@ -11,7 +11,7 @@
     state: present
   become: yes
 
-- name: Install Host Agent dependencies
+- name: Install Snap Agent dependencies
   apt:
     name: "{{ package_name }}"
     update_cache: yes
