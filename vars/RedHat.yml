@@ -1,3 +1,3 @@
 ---
-repo_baseurl: "https://packagecloud.io/SolarWinds/snap-agent/el/6/$basearch"
+repo_baseurl: "https://packagecloud.io/solarwinds/swisnap/el/6/$basearch"
 repo_metadata_expire: 300

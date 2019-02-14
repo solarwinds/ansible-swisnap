@@ -1,3 +1,3 @@
 ---
-repo_gpgkey: "https://packagecloud.io/SolarWinds/snap-agent/gpgkey"
+repo_gpgkey: "https://packagecloud.io/solarwinds/swisnap/gpgkey"
 package_name: solarwinds-snap-agent
