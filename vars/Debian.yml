@@ -1,2 +1,2 @@
 ---
-solarwinds_snap_agent_deb_repo: 'deb https://packagecloud.io/solarwinds/swisnap/ubuntu/ trusty main'
+solarwinds_snap_agent_deb_repo: "deb https://packagecloud.io/solarwinds/{{ repo }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} main"
