@@ -15,5 +15,5 @@
 - name: Install Snap Agent dependencies
   yum:
     name: "{{ package_name }}"
-    state: present
+    state: latest
   become: yes
