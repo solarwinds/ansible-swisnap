@@ -1,6 +1,6 @@
 ---
 appoptics_token: ""
-log_level: 3
+log_level: warning
 log_path: /var/log/SolarWinds/Snap
 listen_addr: 127.0.0.1
 listen_port: 21414
@@ -20,6 +20,3 @@ socks_proxy_url: ""
 authenticate_socks_proxy: false
 socks_proxy_user: ""
 socks_proxy_password: ""
-
-publisher_grpc_timeout: 10
-aosystem_grpc_timeout: 10

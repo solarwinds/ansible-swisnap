@@ -1,8 +1,7 @@
-#jinja2: trim_blocks:False
 ---
 # log_level for the Snap daemon. Supported values are
-# 1 - Debug, 2 - Info, 3 - Warning, 4 - Error, 5 - Fatal.
-# Default value is 3.
+# trace, debug, info, warning, error, fatal, panic
+# Default value is warning
 log_level: {{ log_level }}
 log_path: {{ log_path }}
 log_format: text
@@ -22,13 +21,29 @@ control:
   # not be loaded. Valid values are 0 - Off, 1 - Enabled, 2 - Warning
   plugin_trust_level: 0
 
+  # Secure plugin communication optional parameters:
+  # solarwinds user should have read access to all certificates and keys.
+  # tls_cert_path sets the TLS certificate path to enable secure plugin communication
+  # and authenticate itself to plugins. Requires also: tls_key_path.
+  #tls_cert_path: /tmp/snaptest-cli.crt
+  # tls_key_path sets the TLS key path to enable secure plugin communication and
+  # authenticate itself to plugins. Requires also: tls_cert_path.
+  #tls_key_path: /tmp/snaptest-cli.key
+  # plugin_tls_cert_path is the path to plugin certificate file used during autoload
+  #plugin_tls_cert_path: /tmp/snaptest-srv.crt
+  # plugin_tls_key_path is the path to plugin certificate's key file used during autoload
+  #plugin_tls_key_path: /tmp/snaptest-srv.key
+  # ca_cert_paths sets the list of filesystem paths (files/directories) to CA certificates
+  # for use in validating
+  #ca_cert_paths: /tmp/small-setup-ca.crt:/tmp/medium-setup-ca.crt:/tmp/ca-certs/
+
   # Configuration plugin_load_timeout sets the maximal time allowed for a plugin to load.
   # Some plugins may require more time to initialize.
   # Default value is 5
   plugin_load_timeout: 15
 
   # The bind address and port the agent uses to control and receive data from plugins.
-  # The default address is 127.0.0.1 and the default port is 21413.
+  # The default address is 127.0.0.1 and the default port is 21414.
   listen_addr: "{{ listen_addr }}"
   listen_port: {{ listen_port }}
 
@@ -86,30 +101,48 @@ control:
           # proxy_user:<username>
           # proxy_password:<password>
           {% endif %}
-          # grpc_timeout sets the maximum time allowed for a gRPC call.
-          # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
-          # When grpc_timeout is increased, then the deadline specified in manifest task file should also be increased to allow
-          # more time for the task to finish all associated jobs. The deadline specifies the maximum time allowed to finish all
-          # the associated task's jobs (like collection and publishing of the metrics) which now can take longer.
-          # Default value is 10
-          grpc_timeout: {{ publisher_grpc_timeout }}
+          # ec2_check_timeout allows to configure timeout for querying EC2 instance metadata URL to determine if host agent
+          # is running on EC2 (or OpenStack) instance. By default it is set to 1s.
+          # ec2_check_timeout: "1s"
 
-    collector:
-      aosystem:
+      publisher-processes:
         all:
-          # grpc_timeout sets the maximum time allowed for a gRPC call.
-          # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
-          # When grpc_timeout is increased, then the deadline specified in manifest task file should also be increased to allow
-          # more time for the task to finish all associated jobs. The deadline specifies the maximum time allowed to finish all
-          # the associated task's jobs (like collection and publishing of the metrics) which now can take longer.
-          # Default value is 10
-          grpc_timeout: {{ aosystem_grpc_timeout }}
+          token: "{{ appoptics_token }}"
+          url: "https://api.appoptics.com/v1/agent/report"
 
   # Tags that will be applied to collected metrics across tasks.
   tags:
    # tags all metrics
-   #/:
-   #  environment: production
+   # /:
+   #   environment: production
    # tags a specific metric namespace
-   #/nginx:
-   #  site: mysite.com
+   # /nginx:
+   #   site: mysite.com
+
+restapi:
+  # enable controls enabling or disabling the REST API for swisnapd. Default value is enabled.
+  enable: true
+
+  # https enables HTTPS for the REST API. If no default certificate and key are provided, then
+  # the REST API will generate a private and public key to use for communication. Default
+  # value is false
+  # https: false
+
+  # rest_auth enables authentication for the REST API. Default value is false
+  # rest_auth: false
+
+  # rest_auth_password sets the password to use for the REST API. Currently user and password
+  # combinations are not supported.
+  # rest_auth_password: API_PASSWORD
+
+  # rest_certificate is the path to the certificate to use for REST API when HTTPS is also enabled.
+  # When https is set to true and rest_certificate and rest_key are not present swisnap is creating cert and key
+  # under paths: /tmp/cert.pem and /tmp/key.pem
+  # rest_certificate: REST_CERTIFICATE
+
+  # rest_key is the path to the private key for the certificate in use by the REST API
+  # when HTTPs is enabled.
+  # rest_key: REST_KEY
+
+  # port sets the port to start the REST API server on. Default is 21413
+  # port: 21413
