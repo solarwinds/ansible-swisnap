@@ -68,39 +68,39 @@ control:
           token: "{{ appoptics_token }}"
           url: "https://api.appoptics.com/v1/measurements"
           # Set this option if you want a different "host" tag to be associated with the metrics you report.
-          {% if hostname_alias is defined %}
+{% if hostname_alias is defined %}
           hostname_alias: {{ hostname_alias }}
-          {% else %}
+{% else %}
           # hostname_alias: myhostname
-          {% endif %}
+{% endif %}
           #
           # Enable support for HTTP proxy.
-          {% if http_proxy %}
+{% if http_proxy %}
           proxy_url: {{ http_proxy_url }}
-            {% if authenticate_http_proxy %}
+{% if authenticate_http_proxy %}
           proxy_user: {{ http_proxy_user }}
           proxy_password: {{ http_proxy_password }}
-            {% endif %}
-          {% else %}
+{% endif %}
+{% else %}
           # proxy_url: "http://<proxy-server-ip>:<port>"
           # When HTTP proxy requires user authentication, uncomment the following lines and update username and password.
           # proxy_user:<username>
           # proxy_password:<password>
-          {% endif %}
+{% endif %}
           #
           # Enable support for SOCKS5 proxy. Only SOCKS5 proxies are supported at this time.
-          {% if socks_proxy %}
+{% if socks_proxy %}
           proxy_url: {{ socks_proxy_url }}
-            {% if authenticate_socks_proxy %}
+{% if authenticate_socks_proxy %}
           proxy_user: {{ socks_proxy_user }}
           proxy_password: {{ socks_proxy_password }}
-            {% endif %}
-          {% else %}
+{% endif %}
+{% else %}
           # When SOCKS5 proxy requires user authentication, uncomment the following lines and update username and password.
           # proxy_url: "socks5://<proxy-server-ip>:<port>"
           # proxy_user:<username>
           # proxy_password:<password>
-          {% endif %}
+{% endif %}
           # ec2_check_timeout allows to configure timeout for querying EC2 instance metadata URL to determine if host agent
           # is running on EC2 (or OpenStack) instance. By default it is set to 1s.
           # ec2_check_timeout: "1s"
@@ -109,6 +109,43 @@ control:
         all:
           token: "{{ appoptics_token }}"
           url: "https://api.appoptics.com/v1/agent/report"
+          # Set this option if you want a different "host" tag to be associated with the metrics you report.
+{% if hostname_alias is defined %}
+          hostname_alias: {{ hostname_alias }}
+{% else %}
+          # hostname_alias: myhostname
+{% endif %}
+          #
+          # Enable support for HTTP proxy.
+{% if http_proxy %}
+          proxy_url: {{ http_proxy_url }}
+{% if authenticate_http_proxy %}
+          proxy_user: {{ http_proxy_user }}
+          proxy_password: {{ http_proxy_password }}
+{% endif %}
+{% else %}
+          # proxy_url: "http://<proxy-server-ip>:<port>"
+          # When HTTP proxy requires user authentication, uncomment the following lines and update username and password.
+          # proxy_user:<username>
+          # proxy_password:<password>
+{% endif %}
+          #
+          # Enable support for SOCKS5 proxy. Only SOCKS5 proxies are supported at this time.
+{% if socks_proxy %}
+          proxy_url: {{ socks_proxy_url }}
+{% if authenticate_socks_proxy %}
+          proxy_user: {{ socks_proxy_user }}
+          proxy_password: {{ socks_proxy_password }}
+{% endif %}
+{% else %}
+          # When SOCKS5 proxy requires user authentication, uncomment the following lines and update username and password.
+          # proxy_url: "socks5://<proxy-server-ip>:<port>"
+          # proxy_user:<username>
+          # proxy_password:<password>
+{% endif %}
+          # ec2_check_timeout allows to configure timeout for querying EC2 instance metadata URL to determine if host agent
+          # is running on EC2 (or OpenStack) instance. By default it is set to 1s.
+          # ec2_check_timeout: "1s"
 
   # Tags that will be applied to collected metrics across tasks.
   tags:
