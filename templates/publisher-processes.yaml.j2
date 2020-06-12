@@ -1,0 +1,49 @@
+#jinja2: lstrip_blocks: True
+---
+v2:
+  publisher:
+    publisher-processes:
+      all:
+        endpoint:
+          token: {{ solarwinds_token }}
+
+          {%- if publisher_processes_url is defined and publisher_processes_url|length %}
+          url: {{ publisher_processes_url }}
+          {% endif %}
+
+          {%- if swisnap_proxy_url is defined and swisnap_proxy_url|length %}
+          proxy_url: {{ swisnap_proxy_url }}
+          {% endif %}
+
+          {%- if swisnap_proxy_user is defined and swisnap_proxy_user|length %}
+          proxy_user: {{ swisnap_proxy_user }}
+          {% endif %}
+          {%- if swisnap_proxy_password is defined and swisnap_proxy_password|length %}
+          proxy_password: {{ swisnap_proxy_password }}
+          {% endif %}
+
+        options:
+          {%- if swisnap_hostname_alias is defined and swisnap_hostname_alias|length %}
+          url: {{ swisnap_hostname_alias }}
+          {% endif %}
+
+          {%- if swisnap_floor_seconds is defined and swisnap_floor_seconds|length %}
+          floor_seconds: {{ swisnap_floor_seconds }}
+          {% endif %}
+
+          {%- if swisnap_period is defined and swisnap_period|length %}
+          period: {{ swisnap_period }}
+          {% endif %}
+
+          {%- if swisnap_host_check_timeout is defined and swisnap_host_check_timeout|length %}
+          host_check_timeout: {{ swisnap_host_check_timeout }}
+          {% endif %}
+
+          ec2:
+            {%- if swisnap_ec2_check_timeout is defined and swisnap_ec2_check_timeout|length %}
+            check_timeout: {{ swisnap_ec2_check_timeout }}
+            {% endif %}
+
+            {%- if swisnap_ec2_check_retries is defined and swisnap_ec2_check_retries|length %}
+            check_retries: {{ swisnap_ec2_check_retries }}
+            {% endif %}

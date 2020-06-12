@@ -1,185 +1,80 @@
+#jinja2: lstrip_blocks: True
 ---
-# log_level for the Snap daemon. Supported values are
-# trace, debug, info, warning, error, fatal, panic
-# Default value is warning
-log_level: {{ log_level }}
-log_path: {{ log_path }}
-log_format: text
+log_level: {{ swisnap_log_level }}
+log_path: {{ swisnap_log_path }}
+{% if swisnap_log_format is defined and swisnap_log_format|length %}
+log_format: {{ swisnap_log_format }}
+{% endif %}
 
 control:
-  # Configuration auto_discover_path sets the directory(s) to auto load plugins and tasks on
-  # the start of the snap daemon. This can be a colon separated list of directories.
-  auto_discover_path: /opt/SolarWinds/Snap/autoload
+  auto_discover_path: {{ swisnap_auto_discover_path }}
+  tasks_autoload_path: {{ swisnap_tasks_autoload_path }}
+  plugin_path: {{ swisnap_plugin_path }}
+  task_path: {{ swisnap_task_path }}
+  {% if swisnap_plugin_trust_level is defined and swisnap_plugin_trust_level|length %}
+  plugin_trust_level: {{ swisnap_plugin_trust_level }}
+  {% endif %}
+  {% if swisnap_plugin_trust_level is defined and swisnap_plugin_trust_level|length %}
+  keyring_paths: {{ swisnap_keyring_paths }}
+  {% endif %}
+  {% if swisnap_tls_cert_path is defined and swisnap_tls_cert_path|length
+     and swisnap_tls_key_path is defined and swisnap_tls_key_path|length %}
+  tls_cert_path: {{ swisnap_tls_cert_path }}
+  tls_key_path: {{ swisnap_tls_key_path }}
+  {% endif %}
+  {% if swisnap_plugin_tls_cert_path is defined and swisnap_plugin_tls_cert_path|length
+     and swisnap_plugin_tls_key_path is defined and swisnap_plugin_tls_key_path|length %}
+  plugin_tls_cert_path: {{ swisnap_plugin_tls_cert_path }}
+  plugin_tls_key_path: {{ swisnap_plugin_tls_key_path }}
+  {% endif %}
+  {% if swisnap_ca_cert_paths is defined and swisnap_ca_cert_paths|length %}
+  ca_cert_paths: {{ swisnap_ca_cert_paths }}
+  {% endif %}
+  {% if swisnap_plugin_load_timeout is defined and swisnap_plugin_load_timeout|length %}
+  plugin_load_timeout: {{ swisnap_plugin_load_timeout }}
+  {% endif %}
 
-  # Configuration plugin_trust_level sets the plugin trust level for swisnapd. The default state
-  # for plugin trust level is enabled (1). When enabled, only signed plugins that can
-  # be verified will be loaded into swisnapd. Signatures are verified from
-  # keyring files specified in keyring_path. Plugin trust can be disabled (0) which
-  # will allow loading of all plugins whether signed or not. The warning state allows
-  # for loading of signed and unsigned plugins. Warning messages will be displayed if
-  # an unsigned plugin is loaded. Any signed plugins that cannot be verified will
-  # not be loaded. Valid values are 0 - Off, 1 - Enabled, 2 - Warning
-  plugin_trust_level: 0
-
-  # Secure plugin communication optional parameters:
-  # solarwinds user should have read access to all certificates and keys.
-  # tls_cert_path sets the TLS certificate path to enable secure plugin communication
-  # and authenticate itself to plugins. Requires also: tls_key_path.
-  #tls_cert_path: /tmp/snaptest-cli.crt
-  # tls_key_path sets the TLS key path to enable secure plugin communication and
-  # authenticate itself to plugins. Requires also: tls_cert_path.
-  #tls_key_path: /tmp/snaptest-cli.key
-  # plugin_tls_cert_path is the path to plugin certificate file used during autoload
-  #plugin_tls_cert_path: /tmp/snaptest-srv.crt
-  # plugin_tls_key_path is the path to plugin certificate's key file used during autoload
-  #plugin_tls_key_path: /tmp/snaptest-srv.key
-  # ca_cert_paths sets the list of filesystem paths (files/directories) to CA certificates
-  # for use in validating
-  #ca_cert_paths: /tmp/small-setup-ca.crt:/tmp/medium-setup-ca.crt:/tmp/ca-certs/
-
-  # Configuration plugin_load_timeout sets the maximal time allowed for a plugin to load.
-  # Some plugins may require more time to initialize.
-  # Default value is 5
-  plugin_load_timeout: 15
-
-  # The bind address and port the agent uses to control and receive data from plugins.
-  # The default address is 127.0.0.1 and the default port is 21414.
-  listen_addr: "{{ listen_addr }}"
-  listen_port: {{ listen_port }}
-
-  # Configuration temp_dir_path sets the temporary directory which houses the temporary files
-  temp_dir_path: {{ temp_dir_path }}
-
-  # temp_dir_enable sets whether the application startup leverage the `temp_path_dir` to start
-  # plugins. The use of the temporary location is considered legacy functionality, so
-  # set this boolean to `true` if you'd like to use it
-  temp_dir_enable: {{ temp_dir_enable }}
-
-  # Search path for load: directives in plugin configuration
-  plugin_path: {{ plugin_path }}
-  task_path: {{ task_path }}
-
-  # Plugins section contains plugin config settings that will be applied for plugins across tasks.
   plugins:
-    include: /opt/SolarWinds/Snap/etc/plugins.d
-    publisher:
-      publisher-appoptics:
-        all:
-          token: "{{ appoptics_token }}"
-          url: "https://api.appoptics.com/v1/measurements"
-          # Set this option if you want a different "host" tag to be associated with the metrics you report.
-{% if hostname_alias is defined %}
-          hostname_alias: {{ hostname_alias }}
-{% else %}
-          # hostname_alias: myhostname
-{% endif %}
-          #
-          # Enable support for HTTP proxy.
-{% if http_proxy %}
-          proxy_url: {{ http_proxy_url }}
-{% if authenticate_http_proxy %}
-          proxy_user: {{ http_proxy_user }}
-          proxy_password: {{ http_proxy_password }}
-{% endif %}
-{% else %}
-          # proxy_url: "http://<proxy-server-ip>:<port>"
-          # When HTTP proxy requires user authentication, uncomment the following lines and update username and password.
-          # proxy_user:<username>
-          # proxy_password:<password>
-{% endif %}
-          #
-          # Enable support for SOCKS5 proxy. Only SOCKS5 proxies are supported at this time.
-{% if socks_proxy %}
-          proxy_url: {{ socks_proxy_url }}
-{% if authenticate_socks_proxy %}
-          proxy_user: {{ socks_proxy_user }}
-          proxy_password: {{ socks_proxy_password }}
-{% endif %}
-{% else %}
-          # When SOCKS5 proxy requires user authentication, uncomment the following lines and update username and password.
-          # proxy_url: "socks5://<proxy-server-ip>:<port>"
-          # proxy_user:<username>
-          # proxy_password:<password>
-{% endif %}
-          # ec2_check_timeout allows to configure timeout for querying EC2 instance metadata URL to determine if host agent
-          # is running on EC2 (or OpenStack) instance. By default it is set to 1s.
-          # ec2_check_timeout: "1s"
-
-      publisher-processes:
-        all:
-          token: "{{ appoptics_token }}"
-          url: "https://api.appoptics.com/v1/agent/report"
-          # Set this option if you want a different "host" tag to be associated with the metrics you report.
-{% if hostname_alias is defined %}
-          hostname_alias: {{ hostname_alias }}
-{% else %}
-          # hostname_alias: myhostname
-{% endif %}
-          #
-          # Enable support for HTTP proxy.
-{% if http_proxy %}
-          proxy_url: {{ http_proxy_url }}
-{% if authenticate_http_proxy %}
-          proxy_user: {{ http_proxy_user }}
-          proxy_password: {{ http_proxy_password }}
-{% endif %}
-{% else %}
-          # proxy_url: "http://<proxy-server-ip>:<port>"
-          # When HTTP proxy requires user authentication, uncomment the following lines and update username and password.
-          # proxy_user:<username>
-          # proxy_password:<password>
-{% endif %}
-          #
-          # Enable support for SOCKS5 proxy. Only SOCKS5 proxies are supported at this time.
-{% if socks_proxy %}
-          proxy_url: {{ socks_proxy_url }}
-{% if authenticate_socks_proxy %}
-          proxy_user: {{ socks_proxy_user }}
-          proxy_password: {{ socks_proxy_password }}
-{% endif %}
-{% else %}
-          # When SOCKS5 proxy requires user authentication, uncomment the following lines and update username and password.
-          # proxy_url: "socks5://<proxy-server-ip>:<port>"
-          # proxy_user:<username>
-          # proxy_password:<password>
-{% endif %}
-          # ec2_check_timeout allows to configure timeout for querying EC2 instance metadata URL to determine if host agent
-          # is running on EC2 (or OpenStack) instance. By default it is set to 1s.
-          # ec2_check_timeout: "1s"
-
-  # Tags that will be applied to collected metrics across tasks.
+    include: {{ swisnap_plugins_config }}
+  {% if swisnap_global_tags is defined and swisnap_global_tags | length %}
   tags:
-   # tags all metrics
-   # /:
-   #   environment: production
-   # tags a specific metric namespace
-   # /nginx:
-   #   site: mysite.com
+    /:
+  {% for key, value in swisnap_global_tags.items() %}
+      {{ key }}: {{ value }}
+  {% endfor %}
+  {% endif %}
 
 restapi:
-  # enable controls enabling or disabling the REST API for swisnapd. Default value is enabled.
-  enable: true
+  enable: {{ swisnap_restapi_enable }}
 
-  # https enables HTTPS for the REST API. If no default certificate and key are provided, then
-  # the REST API will generate a private and public key to use for communication. Default
-  # value is false
-  # https: false
+  {%- if swisnap_restapi_https is defined and swisnap_restapi_https|length %}
+  https: {{ swisnap_restapi_https }}
+  {% endif %}
 
-  # rest_auth enables authentication for the REST API. Default value is false
-  # rest_auth: false
+  {%- if swisnap_restapi_rest_auth is defined and swisnap_restapi_rest_auth|length %}
+  rest_auth: {{ swisnap_restapi_rest_auth }}
+  {% endif %}
 
-  # rest_auth_password sets the password to use for the REST API. Currently user and password
-  # combinations are not supported.
-  # rest_auth_password: API_PASSWORD
+  {%- if swisnap_restapi_rest_auth_password is defined and swisnap_restapi_rest_auth_password|length %}
+  rest_auth_password: {{ swisnap_restapi_rest_auth_password }}
+  {% endif %}
 
-  # rest_certificate is the path to the certificate to use for REST API when HTTPS is also enabled.
-  # When https is set to true and rest_certificate and rest_key are not present swisnap is creating cert and key
-  # under paths: /tmp/cert.pem and /tmp/key.pem
-  # rest_certificate: REST_CERTIFICATE
+  {%- if swisnap_restapi_rest_certificate is defined and swisnap_restapi_rest_certificate|length %}
+  rest_certificate: {{ swisnap_restapi_rest_certificate }}
+  {% endif %}
 
-  # rest_key is the path to the private key for the certificate in use by the REST API
-  # when HTTPs is enabled.
-  # rest_key: REST_KEY
+  {%- if swisnap_restapi_rest_key is defined and swisnap_restapi_rest_key|length %}
+  rest_key: {{ swisnap_restapi_rest_key }}
+  {% endif %}
 
-  # port sets the port to start the REST API server on. Default is 21413
-  # port: 21413
+  {%- if swisnap_restapi_port is defined and swisnap_restapi_port|length %}
+  port: {{ swisnap_restapi_port }}
+  {% endif %}
+
+  {%- if swisnap_restapi_addr is defined and swisnap_restapi_addr|length %}
+  addr: {{ swisnap_restapi_addr }}
+  {% endif %}
+
+  {%- if swisnap_restapi_plugin_load_timeout is defined and swisnap_restapi_plugin_load_timeout|length %}
+  plugin_load_timeout: {{ swisnap_restapi_plugin_load_timeout }}
+  {% endif %}

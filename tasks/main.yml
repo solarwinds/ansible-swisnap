@@ -6,7 +6,7 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Include OS specific Snap Agent installation
-  include: snap-agent-{{ ansible_os_family }}.yml
+  include: swisnap-{{ ansible_os_family }}.yml
 
 - name: Include Host Agent configuration
-  include: snap-agent-config.yml
+  include: swisnap-configs.yml

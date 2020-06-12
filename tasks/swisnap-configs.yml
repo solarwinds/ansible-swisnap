@@ -1,0 +1,30 @@
+---
+- name: Insert SolarWinds Token to Snap Agent config file (Linux)
+  template:
+    src: config.yaml.j2
+    dest: /opt/SolarWinds/Snap/etc/config.yaml
+    owner: "{{ swisnap_user }}"
+    group: "{{ swisnap_user_group }}"
+  notify: Restart Linux service
+  become: yes
+  when: ansible_os_family != "Windows"
+
+- name: Configure publisher AppOptics config file
+  template:
+    src: publisher-appoptics.yaml.j2
+    dest: "{{ swinsap_publisher_appoptics_path }}"
+    owner: "{{ swisnap_user }}"
+    group: "{{ swisnap_user_group }}"
+  notify: Restart Linux service
+  become: yes
+  when: ansible_os_family != "Windows"
+
+- name: Configure publisher processes config file
+  template:
+    src: publisher-processes.yaml.j2
+    dest: "{{ swinsap_processes_appoptics_path }}"
+    owner: "{{ swisnap_user }}"
+    group: "{{ swisnap_user_group }}"
+  notify: Restart Linux service
+  become: yes
+  when: ansible_os_family != "Windows"

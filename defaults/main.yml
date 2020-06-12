@@ -1,22 +1,48 @@
 ---
-appoptics_token: ""
-log_level: warning
-log_path: /var/log/SolarWinds/Snap
-listen_addr: 127.0.0.1
-listen_port: 21414
-temp_dir_path: /tmp/SolarWinds/Snap
-temp_dir_enable: false
-plugin_path: /opt/SolarWinds/Snap/bin
-task_path: /opt/SolarWinds/Snap/etc/tasks.d
+solarwinds_token: ""
 
-http_proxy: false
-http_proxy_url: ""
-authenticate_http_proxy: false
-http_proxy_user: ""
-http_proxy_password: ""
+swinsap_dir_path: /opt/SolarWinds/Snap
+swisnap_plugins_config: "{{ swinsap_dir_path }}/etc/plugins.d"
+swinsap_publisher_appoptics_path: "{{ swisnap_plugins_config }}/publisher-appoptics.yaml"
+swinsap_processes_appoptics_path: "{{ swisnap_plugins_config }}/publisher-processes.yaml"
+swisnap_auto_discover_path: "{{ swinsap_dir_path }}/etc/autoload"
+swisnap_tasks_autoload_path: "{{ swinsap_dir_path }}/etc/tasks-autoload.d"
+swisnap_plugin_path: "{{ swinsap_dir_path }}/bin"
+swisnap_task_path: "{{ swinsap_dir_path }}/etc/tasks.d"
 
-socks_proxy: false
-socks_proxy_url: ""
-authenticate_socks_proxy: false
-socks_proxy_user: ""
-socks_proxy_password: ""
+swisnap_user: solarwinds
+swisnap_user_group: solarwinds
+
+swisnap_log_level: warning
+swisnap_log_path: /var/log/SolarWinds/Snap
+swisnap_log_format: text
+swisnap_plugin_trust_level: ""
+swisnap_keyring_paths: ""
+swisnap_tls_cert_path: ""
+swisnap_tls_key_path: ""
+swisnap_plugin_tls_cert_path: ""
+swisnap_plugin_tls_key_path: ""
+swisnap_ca_cert_paths: ""
+swisnap_plugin_load_timeout: ""
+swisnap_global_tags: {}
+swisnap_restapi_enable: true
+swisnap_restapi_https: ""
+swisnap_restapi_rest_auth: ""
+swisnap_restapi_rest_auth_password: ""
+swisnap_restapi_rest_certificate: ""
+swisnap_restapi_rest_key: ""
+swisnap_restapi_port: ""
+swisnap_restapi_addr: ""
+swisnap_restapi_plugin_load_timeout: ""
+
+publisher_appoptics_url: ""
+publisher_processes_url: ""
+swisnap_hostname_alias: ""
+swisnap_proxy_url: ""
+swisnap_proxy_user: ""
+swisnap_proxy_password: ""
+swisnap_host_check_timeout: ""
+swisnap_ec2_check_timeout: ""
+swisnap_ec2_check_retries: ""
+swisnap_floor_seconds: ""
+swisnap_period: ""

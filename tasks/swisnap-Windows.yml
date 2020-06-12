@@ -10,6 +10,6 @@
     arguments:
       - /quiet
       - /passive
-      - TOKEN={{ appoptics_token }}
+      - TOKEN={{ solarwinds_token }}
       - EULA=accept
     state: present
