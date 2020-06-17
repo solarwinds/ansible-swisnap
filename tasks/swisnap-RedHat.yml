@@ -4,16 +4,16 @@
     name: SolarWinds_snap-agent
     file: /etc/yum.repos.d/SolarWinds_snap-agent
     description: SolarWinds Snap Agent repository
-    baseurl: "{{ repo_baseurl }}"
-    gpgkey: "{{ repo_gpgkey }}"
+    baseurl: "{{ swisnap_repo_baseurl }}"
+    gpgkey: "{{ swisnap_repo_gpgkey }}"
     gpgcheck: no
     repo_gpgcheck: yes
     sslcacert: /etc/pki/tls/certs/ca-bundle.crt
-    metadata_expire: "{{ repo_metadata_expire }}"
+    metadata_expire: "{{ swisnap_repo_metadata_expire }}"
   become: yes
 
 - name: Install Snap Agent dependencies
   yum:
-    name: "{{ package_name }}"
-    state: latest
+    name: "{{ swisnap_package_name }}"
+    state: present
   become: yes

@@ -8,7 +8,7 @@
   fail:
     msg: "Your RedHat/CentOS version is not supported. The SolarWinds Snap Agent is supported on RHEL6, RHEL7, RHEL8 and corresponding CentOS versions"
   when:
-    - ansible_os_family == "RedHat"
+    - ansible_os_family == "RedHat" and ansible_distribution != "Amazon"
     - ansible_distribution_major_version|int < 6 or ansible_distribution_major_version|int > 8
 
 - name: Check Debian version

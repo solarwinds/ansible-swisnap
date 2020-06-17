@@ -1,0 +1,26 @@
+---
+sudo: true
+dist: bionic
+services: docker
+
+language: python
+
+python: "3.8"
+
+env:
+  matrix:
+    - PLATFORM=debian:8
+    - PLATFORM=debian:9
+    - PLATFORM=debian:10
+    - PLATFORM=ubuntu:xenial
+    - PLATFORM=ubuntu:bionic
+    - PLATFORM=ubuntu:focal
+    - PLATFORM=centos:6
+    - PLATFORM=centos:7
+    - PLATFORM=centos:8
+    - PLATFORM=amazonlinux:1
+    - PLATFORM=amazonlinux:2
+
+install: pip install -r molecule/requirements.txt
+
+script: molecule test --all

@@ -1,14 +1,13 @@
 ---
 solarwinds_token: ""
 
-swinsap_dir_path: /opt/SolarWinds/Snap
-swisnap_plugins_config: "{{ swinsap_dir_path }}/etc/plugins.d"
-swinsap_publisher_appoptics_path: "{{ swisnap_plugins_config }}/publisher-appoptics.yaml"
-swinsap_processes_appoptics_path: "{{ swisnap_plugins_config }}/publisher-processes.yaml"
-swisnap_auto_discover_path: "{{ swinsap_dir_path }}/etc/autoload"
-swisnap_tasks_autoload_path: "{{ swinsap_dir_path }}/etc/tasks-autoload.d"
-swisnap_plugin_path: "{{ swinsap_dir_path }}/bin"
-swisnap_task_path: "{{ swinsap_dir_path }}/etc/tasks.d"
+swisnap_plugins_config: /opt/SolarWinds/Snap/etc/plugins.d
+swinsap_publisher_appoptics_path: /opt/SolarWinds/Snap/etc/plugins.d/publisher-appoptics.yaml
+swinsap_processes_appoptics_path: /opt/SolarWinds/Snap/etc/plugins.d/publisher-processes.yaml
+swisnap_auto_discover_path: /opt/SolarWinds/Snap/autoload
+swisnap_tasks_autoload_path: /opt/SolarWinds/Snap/etc/tasks-autoload.d
+swisnap_plugin_path: /opt/SolarWinds/Snap/bin
+swisnap_task_path: /opt/SolarWinds/Snap/etc/tasks.d
 
 swisnap_user: solarwinds
 swisnap_user_group: solarwinds

@@ -11,10 +11,10 @@ control:
   tasks_autoload_path: {{ swisnap_tasks_autoload_path }}
   plugin_path: {{ swisnap_plugin_path }}
   task_path: {{ swisnap_task_path }}
-  {% if swisnap_plugin_trust_level is defined and swisnap_plugin_trust_level|length %}
+  {% if swisnap_plugin_trust_level is defined and swisnap_plugin_trust_level|string|length %}
   plugin_trust_level: {{ swisnap_plugin_trust_level }}
   {% endif %}
-  {% if swisnap_plugin_trust_level is defined and swisnap_plugin_trust_level|length %}
+  {% if swisnap_keyring_paths is defined and swisnap_keyring_paths|length %}
   keyring_paths: {{ swisnap_keyring_paths }}
   {% endif %}
   {% if swisnap_tls_cert_path is defined and swisnap_tls_cert_path|length

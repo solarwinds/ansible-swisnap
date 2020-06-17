@@ -1,3 +1,4 @@
+---
 - name: Download SolarWinds Snap Agent installer
   win_get_url:
     url: "{{ snap_agent_installer }}"

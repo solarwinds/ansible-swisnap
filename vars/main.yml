@@ -1,4 +1,4 @@
 ---
-repo: swisnap
-repo_gpgkey: "https://packagecloud.io/solarwinds/{{ repo }}/gpgkey"
-package_name: solarwinds-snap-agent
+swisnap_repo: swisnap
+swisnap_repo_gpgkey: "https://packagecloud.io/solarwinds/{{ swisnap_repo }}/gpgkey"
+swisnap_package_name: solarwinds-snap-agent

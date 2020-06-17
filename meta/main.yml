@@ -1,18 +1,32 @@
 ---
 galaxy_info:
-  author: Dawid Śmiech
+  author: "support@solarwinds.com"
   description: SolarWinds Snap Agent Installer
   company: SolarWinds, LLC
-  license: MIT
+  license: Apache2
   min_ansible_version: 2.1
   platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+        - focal
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+        - stretch
+        - buster
     - name: EL
       versions:
         - 6
         - 7
+        - 8
     - name: Debian
       versions:
         - all
-  categories: monitoring
+  galaxy_tags:
+    - monitoring
 
 dependencies: []

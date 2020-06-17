@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: ${PLATFORM:-ubuntu:focal}
+    privileged: True
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+    command: /sbin/init
+lint: |
+  set -e
+  yamllint -c molecule/yamllint-config.yaml .
+  ansible-lint
+  flake8 --max-line-length 160
+  black --check .
+provisioner:
+  name: ansible
+verifier:
+  name: testinfra
+  enabled: True

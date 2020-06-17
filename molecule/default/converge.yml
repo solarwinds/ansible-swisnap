@@ -1,0 +1,6 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: ansible-swisnap
+      solarwinds_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e

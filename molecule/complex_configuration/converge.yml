@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: ansible-swisnap
+      solarwinds_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e
+      swisnap_plugin_trust_level: 1
+      swisnap_hostname_alias: swisnap_hostname
+      swisnap_proxy_url: http://127.0.0.1:12345
+      swisnap_proxy_user: test_user
+      swisnap_proxy_password: test_pass
+      swisnap_host_check_timeout: 10s
+      swisnap_ec2_check_timeout: 5s
+      swisnap_ec2_check_retries: 5
+      swisnap_floor_seconds: 50
+      swisnap_period: 30

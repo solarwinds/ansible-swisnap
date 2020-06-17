@@ -1,0 +1,9 @@
+ansible
+ansible-lint
+black
+docker
+flake8
+molecule
+pytest
+testinfra
+yamllint

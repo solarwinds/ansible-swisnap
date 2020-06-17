@@ -1,19 +1,30 @@
 ---
+- name: Install gnupg
+  apt:
+    name:
+      - curl
+      - gnupg
+      - debian-archive-keyring
+      - apt-transport-https
+    state: present
+    update_cache: yes
+  become: yes
+
 - name: Add repository gpg key
   apt_key:
-    url: "{{ repo_gpgkey }}"
+    url: "{{ swisnap_repo_gpgkey }}"
     state: present
   become: yes
 
 - name: Set up package repository
   apt_repository:
-    repo: "{{ solarwinds_snap_agent_deb_repo }}"
+    repo: "{{ swisnap_deb_repo }}"
     state: present
   become: yes
 
 - name: Install Snap Agent dependencies
   apt:
-    name: "{{ package_name }}"
-    state: latest
+    name: "{{ swisnap_package_name }}"
+    state: present
     update_cache: yes
   become: yes

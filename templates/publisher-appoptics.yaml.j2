@@ -6,12 +6,12 @@ v1:
       all:
         token: {{ solarwinds_token }}
 
-        {%- if publisher_appoptics_url is defined and publisher_appoptics_url|length %}
+        {% if publisher_appoptics_url is defined and publisher_appoptics_url|length %}
         url: {{ publisher_appoptics_url }}
         {% endif %}
 
         {%- if swisnap_hostname_alias is defined and swisnap_hostname_alias|length %}
-        url: {{ swisnap_hostname_alias }}
+        hostname_alias: {{ swisnap_hostname_alias }}
         {% endif %}
 
         {%- if swisnap_proxy_url is defined and swisnap_proxy_url|length %}
@@ -33,11 +33,11 @@ v1:
         ec2_check_timeout: {{ swisnap_ec2_check_timeout }}
         {% endif %}
 
-        {%- if swisnap_floor_seconds is defined and swisnap_floor_seconds|length %}
+        {%- if swisnap_floor_seconds is defined and swisnap_floor_seconds|string|length %}
         floor_seconds: {{ swisnap_floor_seconds }}
         {% endif %}
 
-        {%- if swisnap_period is defined and swisnap_period|length %}
+        {%- if swisnap_period is defined and swisnap_period|string|length %}
         period: {{ swisnap_period }}
         {% endif %}
 
@@ -48,7 +48,7 @@ v2:
         endpoint:
           token: {{ solarwinds_token }}
 
-          {%- if publisher_appoptics_url is defined and publisher_appoptics_url|length %}
+          {% if publisher_appoptics_url is defined and publisher_appoptics_url|length %}
           url: {{ publisher_appoptics_url }}
           {% endif %}
 
@@ -64,15 +64,15 @@ v2:
           {% endif %}
 
         options:
-          {%- if swisnap_hostname_alias is defined and swisnap_hostname_alias|length %}
-          url: {{ swisnap_hostname_alias }}
+          {% if swisnap_hostname_alias is defined and swisnap_hostname_alias|length %}
+          hostname_alias: {{ swisnap_hostname_alias }}
           {% endif %}
 
-          {%- if swisnap_floor_seconds is defined and swisnap_floor_seconds|length %}
+          {%- if swisnap_floor_seconds is defined and swisnap_floor_seconds|string|length %}
           floor_seconds: {{ swisnap_floor_seconds }}
           {% endif %}
 
-          {%- if swisnap_period is defined and swisnap_period|length %}
+          {%- if swisnap_period is defined and swisnap_period|string|length %}
           period: {{ swisnap_period }}
           {% endif %}
 
@@ -81,10 +81,10 @@ v2:
           {% endif %}
 
           ec2:
-            {%- if swisnap_ec2_check_timeout is defined and swisnap_ec2_check_timeout|length %}
+            {% if swisnap_ec2_check_timeout is defined and swisnap_ec2_check_timeout|length %}
             check_timeout: {{ swisnap_ec2_check_timeout }}
             {% endif %}
 
-            {%- if swisnap_ec2_check_retries is defined and swisnap_ec2_check_retries|length %}
+            {%- if swisnap_ec2_check_retries is defined and swisnap_ec2_check_retries|string|length %}
             check_retries: {{ swisnap_ec2_check_retries }}
             {% endif %}
