@@ -49,3 +49,60 @@
     dest: "{{ swinsap_processes_appoptics_path }}"
   notify: Restart Windows service
   when: ansible_os_family == "Windows"
+
+- name: Copy V1 tasks (Linux)
+  copy:
+    src: "{{ swisnap_custom_v1_task_path }}"
+    dest: "{{ swisnap_task_path }}"
+    owner: "{{ swisnap_user }}"
+    group: "{{ swisnap_user_group }}"
+    mode: 0644
+  when:
+    - swisnap_custom_v1_task_path | length > 0
+    - ansible_os_family != "Windows"
+
+- name: Copy V2 tasks (Linux)
+  copy:
+    src: "{{ swisnap_custom_v2_task_path }}"
+    dest: "{{ swisnap_tasks_autoload_path }}"
+    owner: "{{ swisnap_user }}"
+    group: "{{ swisnap_user_group }}"
+    mode: 0644
+  when:
+    - swisnap_custom_v2_task_path | length > 0
+    - ansible_os_family != "Windows"
+
+- name: Copy plugin configs (Linux)
+  copy:
+    src: "{{ swisnap_custom_plugin_configs_path }}"
+    dest: "{{ swisnap_plugins_config }}"
+    owner: "{{ swisnap_user }}"
+    group: "{{ swisnap_user_group }}"
+    mode: 0644
+  when:
+    - swisnap_custom_plugin_configs_path | length > 0
+    - ansible_os_family != "Windows"
+
+- name: Copy V1 tasks (Windows)
+  win_copy:
+    src: "{{ swisnap_custom_v1_task_path }}"
+    dest: "{{ swisnap_task_path }}"
+  when:
+    - swisnap_custom_v1_task_path | length > 0
+    - ansible_os_family == "Windows"
+
+- name: Copy V2 tasks (Windows)
+  win_copy:
+    src: "{{ swisnap_custom_v2_task_path }}"
+    dest: "{{ swisnap_tasks_autoload_path }}"
+  when:
+    - swisnap_custom_v2_task_path | length > 0
+    - ansible_os_family == "Windows"
+
+- name: Copy plugin configs (Windows)
+  win_copy:
+    src: "{{ swisnap_custom_plugin_configs_path }}"
+    dest: "{{ swisnap_plugins_config }}"
+  when:
+    - swisnap_custom_plugin_configs_path | length > 0
+    - ansible_os_family == "Windows"

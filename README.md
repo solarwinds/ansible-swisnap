@@ -1,70 +1,172 @@
 # SolarWinds Snap Agent Ansible Role
 
+[![Build Status](https://travis-ci.com/librato/ansible-swisnap.svg?token=yqMnckESZUMMbnJ1wWMV&branch=master)](https://travis-ci.com/librato/ansible-swisnap)
 
 Installs and configures SolarWinds Snap Agent on RHEL/CentOS, Debian/Ubuntu or Windows servers.
+
+For more detailed information about SolarWinds Snap Agent please refer to [documentation](https://docs.appoptics.com/kb/host_infrastructure/host_agent/)
 
 ## Role Variables
 
 Ansible role variables with default values are listed below:
 
 ```yaml
-appoptics_token: ""
+solarwinds_token: ""
 ```
 AppOptics API [token](https://docs.appoptics.com/kb/user_org/tokens/#api-tokens-and-token-roles).
+It has to be configured by user before running the role
 
 ```yaml
-log_level: 3
-log_path: /var/log/SolarWinds/Snap
+swisnap_hostname_alias: ""
 ```
-Logging level and path to file.
+Hostname alias for the server which will be used in AppOptics UI
 
 ```yaml
-listen_addr: 127.0.0.1
-listen_port: 21414
+swisnap_main_config_path: /opt/SolarWinds/Snap/etc/config.yaml
 ```
-Address and port of running instance of SolarWinds Snap Agent.
+Path to SolarWinds Snap Agent's main configuration file
 
 ```yaml
-temp_dir_path: /tmp/SolarWinds/Snap
-temp_dir_enable: false
+swisnap_plugins_config: /opt/SolarWinds/Snap/etc/plugins.d
 ```
+Path to SolarWinds Snap Agent's plugin configuration files
 
 ```yaml
-plugin_path: /opt/SolarWinds/Snap/bin
+swinsap_publisher_appoptics_path: /opt/SolarWinds/Snap/etc/plugins.d/publisher-appoptics.yaml
 ```
-Path where SolarWinds Snap Agent's plugins binaries are stored.
+Path to SolarWinds Snap Agent's publisher AppOptics configuration files
 
 ```yaml
-task_path: /opt/SolarWinds/Snap/etc/tasks.d
+swinsap_processes_appoptics_path: /opt/SolarWinds/Snap/etc/plugins.d/publisher-processes.yaml
 ```
-Path to SolarWinds Snap Agent's tasks files.
+Path to SolarWinds Snap Agent's publisher processes configuration files
 
 ```yaml
-http_proxy: false
-http_proxy_url: ""
-authenticate_http_proxy: false
-http_proxy_user: ""
-http_proxy_password: ""
-
-socks_proxy: false
-socks_proxy_url: ""
-authenticate_socks_proxy: false
-socks_proxy_user: ""
-socks_proxy_password: ""
+swisnap_auto_discover_path: /opt/SolarWinds/Snap/autoload
 ```
-Optional http and socks proxies settings.
+Path to SolarWinds Snap Agent's autoload directory for V1 plugins
 
 ```yaml
-publisher_grpc_timeout: 10
-aosystem_grpc_timeout: 10
+swisnap_tasks_autoload_path: /opt/SolarWinds/Snap/etc/tasks-autoload.d
 ```
-AppOptics Publisher and aosystem plugins GRPC settings.
+Path to SolarWinds Snap Agent's V2 tasks files
 
-OS-specific variables are stored in `vars/`. They're included in main task and, other than `installer_download_path`, shouldn't be overriden.
+```yaml
+swisnap_plugin_path: /opt/SolarWinds/Snap/bin
+```
+Path where SolarWinds Snap Agent's plugins binaries are stored
+
+```yaml
+swisnap_task_path: /opt/SolarWinds/Snap/etc/tasks.d
+```
+Path to SolarWinds Snap Agent's V1 tasks files
+
+```yaml
+swisnap_service: swisnapd
+swisnap_user: solarwinds
+swisnap_user_group: solarwinds
+```
+Name of SolarWinds Snap Agent service. User and group under which service will operate
+
+```yaml
+swisnap_log_level: warning
+swisnap_log_path: /var/log/SolarWinds/Snap
+swisnap_log_format: text
+```
+Logging level, path to log file and log format.
+
+```yaml
+swisnap_plugin_trust_level: ""
+swisnap_keyring_paths: ""
+```
+Plugin trust level for swisnapd. When enabled, only signed plugins that can be verified will be loaded into swisnapd. Signatures are verified from keyring files specified in swisnap_keyring_path. Valid values are 0 - Off, 1 - Enabled, 2 - Warning
+
+```yaml
+swisnap_tls_cert_path: ""
+swisnap_tls_key_path: ""
+swisnap_plugin_tls_cert_path: ""
+swisnap_plugin_tls_key_path: ""
+swisnap_ca_cert_paths: ""
+```
+Secure plugin communication optional parameters. 
+
+```yaml
+swisnap_plugin_load_timeout: ""
+```
+The maximal time allowed for a plugin to load. Default value is 30
+
+```yaml
+swisnap_global_tags: {}
+```
+Tags that will be applied to collected metrics across tasks
+
+```yaml
+swisnap_restapi_enable: true
+swisnap_restapi_https: ""
+swisnap_restapi_rest_auth: ""
+swisnap_restapi_rest_auth_password: ""
+swisnap_restapi_rest_certificate: ""
+swisnap_restapi_rest_key: ""
+swisnap_restapi_port: ""
+swisnap_restapi_addr: ""
+swisnap_restapi_plugin_load_timeout: ""
+```
+Optional REST API parameters. By default REST API is enabled
+
+```yaml
+publisher_appoptics_url: ""
+publisher_processes_url: ""
+```
+These parameters can override default URL for publishers
+
+```yaml
+swisnap_proxy_url: ""
+swisnap_proxy_user: ""
+swisnap_proxy_password: ""
+```
+Optional proxy settings
+
+```yaml
+swisnap_host_check_timeout: ""
+```
+swisnap_host_check_timeout allows to configure timeout for querying host operating system for identification informations. Default value is set to 5s
+
+```yaml
+swisnap_ec2_check_timeout: ""
+```
+swisnap_ec2_check_timeout allows to configure timeout for querying EC2 instance metadata URL to determine if host agent is running on EC2 (or OpenStack) instance. By default it is set to 1s
+
+```yaml
+swisnap_ec2_check_retries: ""
+```
+swisnap_ec2_check_retries allows to configure number of retries for querying EC2 instance metadata URL to determine if host agent is running on EC2 (or OpenStack) instance. By default it is set to 3
+
+```yaml
+swisnap_floor_seconds: ""
+```
+whether to floor timestamps to a specific interval, default value is 60 seconds
+
+```yaml
+swisnap_period: ""
+```
+metrics interval period to report to AppOptics API, default value is 60 seconds
+
+```yaml
+swisnap_custom_v1_task_path: ""
+swisnap_custom_v2_task_path: ""
+swisnap_custom_plugin_configs_path: ""
+```
+Paths to directories with custom task and plugin configuration files. It allows users to configure additional plugins. It should be path to directory in format ``/path/to/directory/``
+
+```yaml
+swisnap_win_installer_download_path: ""
+```
+Path to download Windows installer. It has to be configured by user before running the role on Windows platform
+
 
 ## Example Playbook
 
-To use SolarWinds Snap Agent Ansible Role clone this repository to directory with your playbook's roles. Usage together with `ansible-swisnap-modules`: [example](https://github.com/librato/ansible-swisnap-modules/blob/master/tests/main.yml)
+To use SolarWinds Snap Agent Ansible Role clone this repository to directory with your playbook's roles
 
 ### Linux
 
@@ -80,15 +182,12 @@ To use SolarWinds Snap Agent Ansible Role clone this repository to directory wit
 Inside `vars/my_vars.yaml`:
 
 ```yaml
-appoptics_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e
-log_level: 2
-listen_port: 55555
+solarwinds_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e
 ```
 
 ### Windows:
 
 ```yaml
----
 - hosts: windows
   vars_files:
     - vars/main.yml
@@ -99,13 +198,13 @@ listen_port: 55555
 Inside `vars/my_vars.yaml`:
 
 ```yaml
-appoptics_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e
-installer_download_path: "C:\\Users\\Administrator\\Downloads\\solarwinds-snap-agent-installer.msi"
+solarwinds_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec3e
+swisnap_win_installer_download_path: "C:\\Users\\Administrator\\Downloads\\solarwinds-snap-agent-installer.msi"
 ```
 
 Inside `inventory`:
 
-```c
+```yaml
 [windows]
 1.2.3.4
 ```

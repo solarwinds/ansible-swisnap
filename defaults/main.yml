@@ -1,6 +1,6 @@
 ---
 solarwinds_token: ""
-
+swisnap_hostname_alias: ""
 
 swisnap_main_config_path: /opt/SolarWinds/Snap/etc/config.yaml
 swisnap_plugins_config: /opt/SolarWinds/Snap/etc/plugins.d
@@ -39,7 +39,6 @@ swisnap_restapi_plugin_load_timeout: ""
 
 publisher_appoptics_url: ""
 publisher_processes_url: ""
-swisnap_hostname_alias: ""
 swisnap_proxy_url: ""
 swisnap_proxy_user: ""
 swisnap_proxy_password: ""
@@ -48,5 +47,9 @@ swisnap_ec2_check_timeout: ""
 swisnap_ec2_check_retries: ""
 swisnap_floor_seconds: ""
 swisnap_period: ""
+
+swisnap_custom_v1_task_path: ""
+swisnap_custom_v2_task_path: ""
+swisnap_custom_plugin_configs_path: ""
 
 swisnap_win_installer_download_path: ""
