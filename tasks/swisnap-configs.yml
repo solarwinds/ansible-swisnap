@@ -1,15 +1,15 @@
 ---
-- name: Insert SolarWinds Token to Snap Agent config file (Linux)
+- name: Configure main config (Linux)
   template:
     src: config.yaml.j2
-    dest: /opt/SolarWinds/Snap/etc/config.yaml
+    dest: "{{ swisnap_main_config_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
 
-- name: Configure publisher AppOptics config file
+- name: Configure publisher AppOptics config file (Linux)
   template:
     src: publisher-appoptics.yaml.j2
     dest: "{{ swinsap_publisher_appoptics_path }}"
@@ -19,7 +19,7 @@
   become: yes
   when: ansible_os_family != "Windows"
 
-- name: Configure publisher processes config file
+- name: Configure publisher processes config file (Linux)
   template:
     src: publisher-processes.yaml.j2
     dest: "{{ swinsap_processes_appoptics_path }}"
@@ -28,3 +28,24 @@
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
+
+- name: Configure main config (Windows)
+  win_template:
+    src: config.yaml.j2
+    dest: "{{ swisnap_main_config_path }}"
+  notify: Restart Windows service
+  when: ansible_os_family == "Windows"
+
+- name: Configure publisher AppOptics config file (Windows)
+  win_template:
+    src: publisher-appoptics.yaml.j2
+    dest: "{{ swinsap_publisher_appoptics_path }}"
+  notify: Restart Windows service
+  when: ansible_os_family == "Windows"
+
+- name: Configure publisher processes config file (Windows)
+  win_template:
+    src: publisher-processes.yaml.j2
+    dest: "{{ swinsap_processes_appoptics_path }}"
+  notify: Restart Windows service
+  when: ansible_os_family == "Windows"

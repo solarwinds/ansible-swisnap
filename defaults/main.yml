@@ -1,6 +1,8 @@
 ---
 solarwinds_token: ""
 
+
+swisnap_main_config_path: /opt/SolarWinds/Snap/etc/config.yaml
 swisnap_plugins_config: /opt/SolarWinds/Snap/etc/plugins.d
 swinsap_publisher_appoptics_path: /opt/SolarWinds/Snap/etc/plugins.d/publisher-appoptics.yaml
 swinsap_processes_appoptics_path: /opt/SolarWinds/Snap/etc/plugins.d/publisher-processes.yaml
@@ -9,6 +11,7 @@ swisnap_tasks_autoload_path: /opt/SolarWinds/Snap/etc/tasks-autoload.d
 swisnap_plugin_path: /opt/SolarWinds/Snap/bin
 swisnap_task_path: /opt/SolarWinds/Snap/etc/tasks.d
 
+swisnap_service: swisnapd
 swisnap_user: solarwinds
 swisnap_user_group: solarwinds
 
@@ -45,3 +48,5 @@ swisnap_ec2_check_timeout: ""
 swisnap_ec2_check_retries: ""
 swisnap_floor_seconds: ""
 swisnap_period: ""
+
+swisnap_win_installer_download_path: ""

@@ -7,10 +7,10 @@ log_format: {{ swisnap_log_format }}
 {% endif %}
 
 control:
-  auto_discover_path: {{ swisnap_auto_discover_path }}
-  tasks_autoload_path: {{ swisnap_tasks_autoload_path }}
-  plugin_path: {{ swisnap_plugin_path }}
-  task_path: {{ swisnap_task_path }}
+  auto_discover_path: {{ swisnap_auto_discover_path | quote }}
+  tasks_autoload_path: {{ swisnap_tasks_autoload_path | quote }}
+  plugin_path: {{ swisnap_plugin_path | quote }}
+  task_path: {{ swisnap_task_path | quote }}
   {% if swisnap_plugin_trust_level is defined and swisnap_plugin_trust_level|string|length %}
   plugin_trust_level: {{ swisnap_plugin_trust_level }}
   {% endif %}
@@ -35,7 +35,7 @@ control:
   {% endif %}
 
   plugins:
-    include: {{ swisnap_plugins_config }}
+    include: {{ swisnap_plugins_config | quote }}
   {% if swisnap_global_tags is defined and swisnap_global_tags | length %}
   tags:
     /:

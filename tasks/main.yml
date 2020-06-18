@@ -5,6 +5,9 @@
 - name: Include OS specific variables
   include_vars: "{{ ansible_os_family }}.yml"
 
+- name: Check variables
+  include_tasks: variables-check.yml
+
 - name: Include OS specific Snap Agent installation
   include: swisnap-{{ ansible_os_family }}.yml
 

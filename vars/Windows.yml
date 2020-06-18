@@ -1,4 +1,12 @@
 ---
-snap_agent_installer: "http://files.solarwinds.cloud/windows-solarwinds-snap-agent/solarwinds-snap-agent.msi"
-snap_agent_product_id: "{DA33CD5D-DFF1-4AC5-B170-34B7F13D0CB6}"
-installer_download_path: ""
+swisnap_agent_installer: "http://files.solarwinds.cloud/windows-solarwinds-snap-agent/solarwinds-snap-agent.msi"
+swisnap_agent_product_id: "{DA33CD5D-DFF1-4AC5-B170-34B7F13D0CB6}"
+
+swisnap_main_config_path: "C:\\ProgramData\\SolarWinds\\Snap\\config.yaml"
+swisnap_plugins_config: "C:\\ProgramData\\SolarWinds\\Snap\\plugins.d"
+swinsap_publisher_appoptics_path: "C:\\ProgramData\\SolarWinds\\Snap\\plugins.d\\publisher-appoptics.yaml"
+swinsap_processes_appoptics_path: "C:\\ProgramData\\SolarWinds\\Snap\\plugins.d\\publisher-processes.yaml"
+swisnap_auto_discover_path: "C:\\Program Files\\SolarWinds\\Snap\\autoload;C:\\ProgramData\\SolarWinds\\Snap\\autoload"
+swisnap_tasks_autoload_path: "C:\\ProgramData\\SolarWinds\\Snap\\tasks-autoload.d"
+swisnap_plugin_path: "C:\\Program Files\\SolarWinds\\Snap\\bin"
+swisnap_task_path: "C:\\ProgramData\\SolarWinds\\Snap\\tasks.d"
