@@ -8,7 +8,6 @@ commands:
       - run:
           name: install python 3.8.3
           command: |
-            sudo apt-get install python-openssl openssl
             (cd $(pyenv root) && git pull)
             pyenv install 3.8.3
 
@@ -35,7 +34,8 @@ jobs:
     - run_tests
 
   ubuntu-xenial:
-    machine: true
+    machine:
+      image: ubuntu-1604:201903-01
     environment:
       PLATFORM: ubuntu:xenial
 
