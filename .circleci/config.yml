@@ -8,6 +8,7 @@ commands:
       - run:
           name: install python 3.8.3
           command: |
+            sudo apt-get install python-openssl
             (cd $(pyenv root) && git pull)
             pyenv install 3.8.3
 
