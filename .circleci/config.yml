@@ -27,7 +27,7 @@ commands:
 jobs:
   debian8:
     machine:
-      image: ubuntu-1804
+      image: ubuntu-1604
     environment:
       PLATFORM: debian:8
 
@@ -44,7 +44,7 @@ jobs:
 
   ubuntu-bionic:
     machine:
-      image: ubuntu-1804
+      image: ubuntu-1604
     environment:
       PLATFORM: ubuntu:bionic
 
