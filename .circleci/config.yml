@@ -8,7 +8,7 @@ commands:
       - run:
           name: install python 3.8.0
           command: |
-            pyenv install 3.8.0
+            pyenv install --list
 
       - run:
           name: "Set Python Version"
