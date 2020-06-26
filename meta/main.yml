@@ -3,7 +3,7 @@ galaxy_info:
   role_name: swisnap
   author: "support@solarwinds.com"
   description: SolarWinds Snap Agent Installer
-  company: SolarWinds, LLC
+  company: SolarWinds Inc.
   license: Apache2
   min_ansible_version: 2.1
   platforms:
