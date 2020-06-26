@@ -8,6 +8,7 @@ commands:
       - run:
           name: install python 3.8.0
           command: |
+            (cd $(pyenv root) && git pull)
             pyenv install --list
 
       - run:
