@@ -1,5 +1,5 @@
 ---
-- name: Install gnupg
+- name: Install apt dependencies
   apt:
     name:
       - curl
