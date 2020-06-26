@@ -1,3 +1,4 @@
+---
 version: 2.1
 commands:
   run_tests:
@@ -29,7 +30,6 @@ jobs:
       image: ubuntu-1604:201903-01
     environment:
       PLATFORM: debian:8
-
     steps:
     - run_tests
 
@@ -38,7 +38,6 @@ jobs:
       image: ubuntu-1604:201903-01
     environment:
       PLATFORM: ubuntu:xenial
-
     steps:
       - run_tests
 
@@ -47,7 +46,6 @@ jobs:
       image: ubuntu-1604:201903-01
     environment:
       PLATFORM: ubuntu:bionic
-
     steps:
       - run_tests
 
