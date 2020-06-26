@@ -166,7 +166,17 @@ Path to download Windows installer. It has to be configured by user before runni
 
 ## Example Playbook
 
-To use SolarWinds Snap Agent Ansible Role clone this repository to directory with your playbook's roles
+Install SolarWinds swinsap role using Ansible Galaxy:
+
+```bash
+ansible-galaxy install solarwinds.swisnap
+```
+
+or clone this repository to directory with your playbook's roles:
+
+```bash
+git clone https://github.com/solarwinds/ansible-swisnap.git solarwinds.swisnap
+```
 
 ### Linux
 
