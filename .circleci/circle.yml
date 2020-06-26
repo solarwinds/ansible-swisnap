@@ -1,0 +1,38 @@
+version: 2.1
+commands:
+  run_tests:
+    description: "Run molecule tests"
+    steps:
+      - checkout
+
+      - run:
+          name: run tests
+          command: pip install -r molecule/requirements.txt
+
+      - run:
+          name: run tests
+          command: molecule test --all
+
+jobs:
+  debian8:
+    machine: true
+    environment:
+      PLATFORM: debian:8
+
+    steps:
+    - run_tests
+
+  ubuntu-xenial:
+    machine: true
+    environment:
+      PLATFORM: ubuntu:xenial
+
+    steps:
+      - run_tests
+
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - debian8
+      - ubuntu-xenial
