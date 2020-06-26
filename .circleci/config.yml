@@ -9,7 +9,7 @@ commands:
           name: install python 3.8.3
           command: |
             (cd $(pyenv root) && git pull)
-            pyenv install --list
+            pyenv install 3.8.3
 
       - run:
           name: "Set Python Version"
