@@ -1,6 +1,6 @@
 # SolarWinds Snap Agent Ansible Role
 
-[![Build Status](https://travis-ci.com/librato/ansible-swisnap.svg?token=yqMnckESZUMMbnJ1wWMV&branch=master)](https://travis-ci.com/librato/ansible-swisnap)
+[![CircleCI](https://circleci.com/gh/solarwinds/ansible-swisnap.svg?style=shield)](https://circleci.com/gh/solarwinds/ansible-swisnap)
 
 Installs and configures SolarWinds Snap Agent on RHEL/CentOS, Debian/Ubuntu or Windows servers.
 
