@@ -30,9 +30,18 @@ jobs:
     steps:
       - run_tests
 
+  ubuntu-bionic:
+    machine: true
+    environment:
+      PLATFORM: ubuntu:bionic
+
+    steps:
+      - run_tests
+
 workflows:
   version: 2.1
   build_and_test:
     jobs:
       - debian8
       - ubuntu-xenial
+      - ubuntu-bionic
