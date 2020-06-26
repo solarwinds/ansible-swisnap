@@ -6,9 +6,8 @@ commands:
       - checkout
 
       - run:
-          name: update pyenv and install python 3.8.0
+          name: install python 3.8.0
           command: |
-            pyenv update
             pyenv install 3.8.0
 
       - run:
