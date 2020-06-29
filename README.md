@@ -1,6 +1,6 @@
 # SolarWinds Snap Agent Ansible Role
 
-[![Build Status](https://travis-ci.com/librato/ansible-swisnap.svg?token=yqMnckESZUMMbnJ1wWMV&branch=master)](https://travis-ci.com/librato/ansible-swisnap)
+[![CircleCI](https://circleci.com/gh/solarwinds/ansible-swisnap.svg?style=shield)](https://circleci.com/gh/solarwinds/ansible-swisnap)
 
 Installs and configures SolarWinds Snap Agent on RHEL/CentOS, Debian/Ubuntu or Windows servers.
 
@@ -166,7 +166,17 @@ Path to download Windows installer. It has to be configured by user before runni
 
 ## Example Playbook
 
-To use SolarWinds Snap Agent Ansible Role clone this repository to directory with your playbook's roles
+Install SolarWinds swinsap role using Ansible Galaxy:
+
+```bash
+ansible-galaxy install solarwinds.swisnap
+```
+
+or clone this repository to directory with your playbook's roles:
+
+```bash
+git clone https://github.com/solarwinds/ansible-swisnap.git solarwinds.swisnap
+```
 
 ### Linux
 

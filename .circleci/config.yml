@@ -1,0 +1,130 @@
+---
+version: 2.1
+commands:
+  run_tests:
+    description: "Run molecule tests"
+    steps:
+      - checkout
+
+      - run:
+          name: "Install python 3.8.3"
+          command: |
+            (cd $(pyenv root) && git pull)
+            pyenv install 3.8.3
+
+      - run:
+          name: "Set Python Version"
+          command: pyenv global 3.8.3
+
+      - run:
+          name: "Install requirements"
+          command: pip install -r molecule/requirements.txt
+
+      - run:
+          name: "Run tests"
+          command: molecule test --all
+
+jobs:
+  debian8:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: debian:8
+    steps:
+      - run_tests
+
+  debian9:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: debian:9
+    steps:
+      - run_tests
+
+  debian10:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: debian:10
+    steps:
+      - run_tests
+
+  ubuntu-xenial:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: ubuntu:xenial
+    steps:
+      - run_tests
+
+  ubuntu-bionic:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: ubuntu:bionic
+    steps:
+      - run_tests
+
+  ubuntu-focal:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: ubuntu:focal
+    steps:
+      - run_tests
+
+  centos6:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: centos:6
+    steps:
+      - run_tests
+
+  centos7:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: centos:7
+    steps:
+      - run_tests
+
+  centos8:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: centos:8
+    steps:
+      - run_tests
+
+  amazonlinux1:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: amazonlinux:1
+    steps:
+      - run_tests
+
+  amazonlinux2:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PLATFORM: amazonlinux:2
+    steps:
+      - run_tests
+
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - debian8
+      - debian9
+      - debian10
+      - ubuntu-xenial
+      - ubuntu-bionic
+      - ubuntu-focal
+      - centos6
+      - centos7
+      - centos8
+      - amazonlinux1
+      - amazonlinux2
