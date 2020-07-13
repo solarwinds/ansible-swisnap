@@ -1,3 +1,4 @@
 ---
-swisnap_repo_baseurl: "https://packagecloud.io/solarwinds/{{ swisnap_repo }}/el/{{ os_major_version }}/$basearch"
+package_could_deb: "{{ 'ol' if ansible_distribution == 'OracleLinux' else 'el' }}"
+swisnap_repo_baseurl: "https://packagecloud.io/solarwinds/{{ swisnap_repo }}/{{ package_could_deb }}/{{ os_major_version }}/$basearch"
 swisnap_repo_metadata_expire: 300
