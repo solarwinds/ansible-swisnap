@@ -4,7 +4,7 @@
     msg: "solarwinds_token variable cannot be empty"
   when: solarwinds_token | length  == 0
 
-- name: Check if swisnap_win_installer_download_path is seti on Windows
+- name: Check if swisnap_win_installer_download_path is set on Windows
   fail:
     msg: "swisnap_win_installer_download_path variable cannot be empty"
   when:
