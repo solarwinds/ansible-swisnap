@@ -57,6 +57,8 @@
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
     mode: 0644
+  notify: Restart Linux service
+  become: yes
   when:
     - swisnap_custom_v1_task_path | length > 0
     - ansible_os_family != "Windows"
@@ -68,6 +70,8 @@
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
     mode: 0644
+  notify: Restart Linux service
+  become: yes
   when:
     - swisnap_custom_v2_task_path | length > 0
     - ansible_os_family != "Windows"
@@ -79,6 +83,8 @@
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
     mode: 0644
+  notify: Restart Linux service
+  become: yes
   when:
     - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family != "Windows"
@@ -87,6 +93,7 @@
   win_copy:
     src: "{{ swisnap_custom_v1_task_path }}"
     dest: "{{ swisnap_task_path }}"
+  notify: Restart Windows service
   when:
     - swisnap_custom_v1_task_path | length > 0
     - ansible_os_family == "Windows"
@@ -95,6 +102,7 @@
   win_copy:
     src: "{{ swisnap_custom_v2_task_path }}"
     dest: "{{ swisnap_tasks_autoload_path }}"
+  notify: Restart Windows service
   when:
     - swisnap_custom_v2_task_path | length > 0
     - ansible_os_family == "Windows"
@@ -103,6 +111,7 @@
   win_copy:
     src: "{{ swisnap_custom_plugin_configs_path }}"
     dest: "{{ swisnap_plugins_config }}"
+  notify: Restart Windows service
   when:
     - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family == "Windows"
