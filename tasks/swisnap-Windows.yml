@@ -1,8 +1,14 @@
 ---
+- name: "Register {{ swisnap_service }} service status"
+  win_service:
+    name: "{{ swisnap_service }}"
+  register: swisnapd_service
+
 - name: Download SolarWinds Snap Agent installer
   win_get_url:
     url: "{{ swisnap_agent_installer }}"
     dest: "{{ swisnap_win_installer_download_path }}"
+  when: download_swisnap_win_installer
 
 - name: Install SolarWinds Snap Agent
   win_package:
@@ -14,3 +20,4 @@
       - TOKEN={{ solarwinds_token }}
       - EULA=accept
     state: present
+  when: not swisnapd_service.exists
