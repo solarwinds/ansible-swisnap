@@ -74,7 +74,7 @@
     - swisnap_custom_v1_task_path | length > 0
     - ansible_os_family != "Windows"
     - swisnap_custom_v1_task_path_info.stat.exists
-    - swisnap_custom_v1_task_path_info.stat.isdir == true
+    - swisnap_custom_v1_task_path_info.stat.isdir
 
 - name: "Register {{ swisnap_custom_v2_task_path }} path info (Linux)"
   stat:
@@ -97,7 +97,7 @@
     - swisnap_custom_v2_task_path | length > 0
     - ansible_os_family != "Windows"
     - swisnap_custom_v2_task_path_info.stat.exists
-    - swisnap_custom_v2_task_path_info.stat.isdir == true
+    - swisnap_custom_v2_task_path_info.stat.isdir
 
 - name: "Register {{ swisnap_custom_v2_task_path }} path info (Linux)"
   stat:
@@ -120,7 +120,7 @@
     - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family != "Windows"
     - swisnap_custom_plugin_configs_path_info.stat.exists
-    - swisnap_custom_plugin_configs_path_info.stat.isdir == true
+    - swisnap_custom_plugin_configs_path_info.stat.isdir
 
 - name: "Register {{ swisnap_custom_v1_task_path }} path info (Windows)"
   win_stat:
@@ -139,7 +139,7 @@
     - swisnap_custom_v1_task_path | length > 0
     - ansible_os_family == "Windows"
     - swisnap_custom_v1_task_path_info.stat.exists
-    - swisnap_custom_v1_task_path_info.stat.isdir == true
+    - swisnap_custom_v1_task_path_info.stat.isdir
 
 - name: "Register {{ swisnap_custom_v2_task_path }} path info (Windows)"
   win_stat:
@@ -158,7 +158,7 @@
     - swisnap_custom_v2_task_path | length > 0
     - ansible_os_family == "Windows"
     - swisnap_custom_v2_task_path_info.stat.exists
-    - swisnap_custom_v2_task_path_info.stat.isdir == true
+    - swisnap_custom_v2_task_path_info.stat.isdir
 
 - name: "Register {{ swisnap_custom_plugin_configs_path }} path info (Windows)"
   win_stat:
@@ -177,4 +177,4 @@
     - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family == "Windows"
     - swisnap_custom_plugin_configs_path_info.stat.exists
-    - swisnap_custom_plugin_configs_path_info.stat.isdir == true
+    - swisnap_custom_plugin_configs_path_info.stat.isdir
