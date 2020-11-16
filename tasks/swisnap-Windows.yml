@@ -1,5 +1,5 @@
 ---
-- name: "Register {{ swisnap_service }} service status"
+- name: "Register {{ swisnap_service }} service status info"
   win_service:
     name: "{{ swisnap_service }}"
   register: swisnapd_service
