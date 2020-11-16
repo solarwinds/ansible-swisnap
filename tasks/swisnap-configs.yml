@@ -53,9 +53,17 @@
   notify: Restart Windows service
   when: ansible_os_family == "Windows"
 
+- name: "Register {{ swisnap_custom_v1_task_path }} path info (Linux)"
+  stat:
+    path: "{{ swisnap_custom_v1_task_path }}"
+  register: swisnap_custom_v1_task_path_info
+  when:
+    - swisnap_custom_v1_task_path | length > 0
+    - ansible_os_family != "Windows"
+
 - name: Copy V1 tasks (Linux)
   copy:
-    src: "{{ swisnap_custom_v1_task_path }}"
+    src: "{{ swisnap_custom_v1_task_path }}/"
     dest: "{{ swisnap_task_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
@@ -65,10 +73,20 @@
   when:
     - swisnap_custom_v1_task_path | length > 0
     - ansible_os_family != "Windows"
+    - swisnap_custom_v1_task_path_info.stat.exists
+    - swisnap_custom_v1_task_path_info.stat.isdir == true
+
+- name: "Register {{ swisnap_custom_v2_task_path }} path info (Linux)"
+  stat:
+    path: "{{ swisnap_custom_v2_task_path }}"
+  register: swisnap_custom_v2_task_path_info
+  when:
+    - swisnap_custom_v2_task_path | length > 0
+    - ansible_os_family != "Windows"
 
 - name: Copy V2 tasks (Linux)
   copy:
-    src: "{{ swisnap_custom_v2_task_path }}"
+    src: "{{ swisnap_custom_v2_task_path }}/"
     dest: "{{ swisnap_tasks_autoload_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
@@ -77,6 +95,16 @@
   become: yes
   when:
     - swisnap_custom_v2_task_path | length > 0
+    - ansible_os_family != "Windows"
+    - swisnap_custom_v2_task_path_info.stat.exists
+    - swisnap_custom_v2_task_path_info.stat.isdir == true
+
+- name: "Register {{ swisnap_custom_v2_task_path }} path info (Linux)"
+  stat:
+    path: "{{ swisnap_custom_plugin_configs_path }}"
+  register: swisnap_custom_plugin_configs_path_info
+  when:
+    - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family != "Windows"
 
 - name: Copy plugin configs (Linux)
@@ -91,6 +119,16 @@
   when:
     - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family != "Windows"
+    - swisnap_custom_plugin_configs_path_info.stat.exists
+    - swisnap_custom_plugin_configs_path_info.stat.isdir == true
+
+- name: "Register {{ swisnap_custom_v1_task_path }} path info (Windows)"
+  win_stat:
+    path: "{{ swisnap_custom_v1_task_path }}"
+  register: swisnap_custom_v1_task_path_info
+  when:
+    - swisnap_custom_v1_task_path | length > 0
+    - ansible_os_family == "Windows"
 
 - name: Copy V1 tasks (Windows)
   win_copy:
@@ -99,6 +137,16 @@
   notify: Restart Windows service
   when:
     - swisnap_custom_v1_task_path | length > 0
+    - ansible_os_family == "Windows"
+    - swisnap_custom_v1_task_path_info.stat.exists
+    - swisnap_custom_v1_task_path_info.stat.isdir == true
+
+- name: "Register {{ swisnap_custom_v2_task_path }} path info (Windows)"
+  win_stat:
+    path: "{{ swisnap_custom_v2_task_path }}"
+  register: swisnap_custom_v2_task_path_info
+  when:
+    - swisnap_custom_v2_task_path | length > 0
     - ansible_os_family == "Windows"
 
 - name: Copy V2 tasks (Windows)
@@ -109,6 +157,16 @@
   when:
     - swisnap_custom_v2_task_path | length > 0
     - ansible_os_family == "Windows"
+    - swisnap_custom_v2_task_path_info.stat.exists
+    - swisnap_custom_v2_task_path_info.stat.isdir == true
+
+- name: "Register {{ swisnap_custom_plugin_configs_path }} path info (Windows)"
+  win_stat:
+    path: "{{ swisnap_custom_plugin_configs_path }}"
+  register: swisnap_custom_plugin_configs_path_info
+  when:
+    - swisnap_custom_plugin_configs_path | length > 0
+    - ansible_os_family == "Windows"
 
 - name: Copy plugin configs (Windows)
   win_copy:
@@ -118,3 +176,5 @@
   when:
     - swisnap_custom_plugin_configs_path | length > 0
     - ansible_os_family == "Windows"
+    - swisnap_custom_plugin_configs_path_info.stat.exists
+    - swisnap_custom_plugin_configs_path_info.stat.isdir == true
