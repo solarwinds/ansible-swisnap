@@ -5,6 +5,7 @@
     dest: "{{ swisnap_main_config_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
@@ -15,6 +16,7 @@
     dest: "{{ swinsap_publisher_appoptics_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
@@ -25,6 +27,7 @@
     dest: "{{ swinsap_processes_appoptics_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
@@ -56,7 +59,7 @@
     dest: "{{ swisnap_task_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
-    mode: 0644
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when:
@@ -69,7 +72,7 @@
     dest: "{{ swisnap_tasks_autoload_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
-    mode: 0644
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when:
@@ -82,7 +85,7 @@
     dest: "{{ swisnap_plugins_config }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
-    mode: 0644
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when:
