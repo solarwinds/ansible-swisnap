@@ -39,7 +39,7 @@ def test_process_swisnapd(host, version):
 
 def test_sockets(host, version):
     if version.startswith("4."):
-        pytest.skip(reason="Using unix socket from version 4.x.x")
+        pytest.skip("Using unix socket from version 4.x.x")
     assert host.socket("tcp://127.0.0.1:21413").is_listening
 
 
