@@ -13,14 +13,14 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.fixture
-def version(host):
-    return host.package(PACKAGE_NAME).version
+def major_version(host):
+    return int(host.package(PACKAGE_NAME).version[0])
 
 
-def test_solarwinds_snap_agent_package(host, version):
+def test_solarwinds_snap_agent_package(host, major_version):
     swisnap = host.package(PACKAGE_NAME)
     assert swisnap.is_installed
-    assert version.startswith("3.") or version.startswith("4.")
+    assert major_version >= 3
 
 
 def test_swinsapd_service(host):
@@ -37,10 +37,11 @@ def test_process_swisnapd(host):
     assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-pub")) == 3
 
 
-def test_sockets(host, version):
-    if version.startswith("4."):
-        pytest.skip("Using unix socket from version 4.x.x")
-    assert host.socket("tcp://127.0.0.1:21413").is_listening
+def test_sockets(host, major_version):
+    if major_version >= 4:
+        assert host.file("/opt/SolarWinds/Snap/run/swisnapd.sock").exists
+    else:
+        assert host.socket("tcp://127.0.0.1:21413").is_listening
 
 
 def test_config_files(host):
