@@ -1,0 +1,30 @@
+---
+collector:
+  apache:
+    all:
+      # apache_mod_status_url is a new line separated list of apache endpoints to monitor.
+      # The format of single entry is:
+      #    <url> <optional server name>
+      # Server name is used to tag and identify metrics. Specifying server name is optional. If it is not specified,
+      # then hostname<:port> is used.
+      # Examples:
+      #  - in case of single apache endpoint
+      #      apache_mod_status_url: "http://localhost/server-status?auto myserver1"
+      #  - in case of multiple apache endpoints
+      #            apache_mod_status_url: |
+      #                   http://localhost/server-status?auto myserver1
+      #                   http://localhost:8080/server-status?auto myserver2
+      apache_mod_status_url: "http://localhost/server-status?auto"
+
+      safe: false
+
+      # grpc_timeout sets the maximum time allowed for a gRPC call.
+      # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
+      # When increasing grpc_timeout value with the deadline value specified in
+      # manifest task file which controls the total time allocated for the
+      # Default value is 10
+      grpc_timeout: 30
+
+load:
+  plugin: snap-plugin-collector-aoapache
+  task: task-aoapache.yaml

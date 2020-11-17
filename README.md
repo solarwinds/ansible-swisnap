@@ -156,7 +156,7 @@ swisnap_custom_v1_task_path: ""
 swisnap_custom_v2_task_path: ""
 swisnap_custom_plugin_configs_path: ""
 ```
-Paths to directories with custom task and plugin configuration files. It allows users to configure additional plugins. It should be path to directory in format ``/path/to/directory/``
+Paths to directories with custom task and plugin configuration files. It allows users to configure additional plugins. It should be path to directory e.g. ``/path/to/directory``
 
 ```yaml
 swisnap_win_installer_download_path: ""
