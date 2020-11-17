@@ -1,6 +1,8 @@
 import os
+import pytest
 import testinfra.utils.ansible_runner
 
+PACKAGE_NAME = "solarwinds-snap-agent"
 SOLARWINDS = "solarwinds"
 SWISNAPD = "swisnapd"
 
@@ -10,10 +12,15 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-def test_solarwinds_snap_agent_package(host):
-    swisnap = host.package("solarwinds-snap-agent")
+@pytest.fixture
+def major_version(host):
+    return int(host.package(PACKAGE_NAME).version[0])
+
+
+def test_solarwinds_snap_agent_package(host, major_version):
+    swisnap = host.package(PACKAGE_NAME)
     assert swisnap.is_installed
-    assert swisnap.version.startswith("3.")
+    assert major_version >= 3
 
 
 def test_swinsapd_service(host):
@@ -24,12 +31,17 @@ def test_swinsapd_service(host):
 
 def test_process_swisnapd(host):
     assert host.process.get(user=SOLARWINDS, comm=SWISNAPD)
-    assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-col")) == 2
+    # checking default collector plugins: aosystem, processes, logs
+    assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-col")) == 3
+    # checking default publisher plugins: publisher-appoptics, publisher-processes
     assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-pub")) == 2
 
 
-def test_sockets(host):
-    assert host.socket("tcp://127.0.0.1:21413").is_listening
+def test_sockets(host, major_version):
+    if major_version >= 4:
+        assert host.file("/opt/SolarWinds/Snap/run/swisnapd.sock").exists
+    else:
+        assert host.socket("tcp://127.0.0.1:21413").is_listening
 
 
 def test_config_files(host):

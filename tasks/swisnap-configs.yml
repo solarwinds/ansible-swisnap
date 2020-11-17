@@ -5,6 +5,7 @@
     dest: "{{ swisnap_main_config_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
@@ -15,6 +16,7 @@
     dest: "{{ swinsap_publisher_appoptics_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
@@ -25,6 +27,7 @@
     dest: "{{ swinsap_processes_appoptics_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when: ansible_os_family != "Windows"
@@ -52,11 +55,11 @@
 
 - name: Copy V1 tasks (Linux)
   copy:
-    src: "{{ swisnap_custom_v1_task_path }}"
+    src: "{{ swisnap_custom_v1_task_path }}/"
     dest: "{{ swisnap_task_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
-    mode: 0644
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when:
@@ -65,11 +68,11 @@
 
 - name: Copy V2 tasks (Linux)
   copy:
-    src: "{{ swisnap_custom_v2_task_path }}"
+    src: "{{ swisnap_custom_v2_task_path }}/"
     dest: "{{ swisnap_tasks_autoload_path }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
-    mode: 0644
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when:
@@ -78,11 +81,11 @@
 
 - name: Copy plugin configs (Linux)
   copy:
-    src: "{{ swisnap_custom_plugin_configs_path }}"
+    src: "{{ swisnap_custom_plugin_configs_path }}/"
     dest: "{{ swisnap_plugins_config }}"
     owner: "{{ swisnap_user }}"
     group: "{{ swisnap_user_group }}"
-    mode: 0644
+    mode: 0640
   notify: Restart Linux service
   become: yes
   when:
@@ -91,7 +94,7 @@
 
 - name: Copy V1 tasks (Windows)
   win_copy:
-    src: "{{ swisnap_custom_v1_task_path }}"
+    src: "{{ swisnap_custom_v1_task_path }}/"
     dest: "{{ swisnap_task_path }}"
   notify: Restart Windows service
   when:
@@ -100,7 +103,7 @@
 
 - name: Copy V2 tasks (Windows)
   win_copy:
-    src: "{{ swisnap_custom_v2_task_path }}"
+    src: "{{ swisnap_custom_v2_task_path }}/"
     dest: "{{ swisnap_tasks_autoload_path }}"
   notify: Restart Windows service
   when:
@@ -109,7 +112,7 @@
 
 - name: Copy plugin configs (Windows)
   win_copy:
-    src: "{{ swisnap_custom_plugin_configs_path }}"
+    src: "{{ swisnap_custom_plugin_configs_path }}/"
     dest: "{{ swisnap_plugins_config }}"
   notify: Restart Windows service
   when:

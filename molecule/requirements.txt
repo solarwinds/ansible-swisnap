@@ -4,6 +4,7 @@ black
 docker
 flake8
 molecule
+molecule-docker
 pytest
 testinfra
 yamllint

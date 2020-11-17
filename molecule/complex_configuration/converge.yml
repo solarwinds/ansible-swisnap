@@ -14,3 +14,5 @@
       swisnap_ec2_check_retries: 5
       swisnap_floor_seconds: 50
       swisnap_period: 30
+      swisnap_custom_v2_task_path: tasks-v2
+      swisnap_custom_plugin_configs_path: plugins

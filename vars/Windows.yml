@@ -1,6 +1,7 @@
 ---
 swisnap_agent_installer: "http://files.solarwinds.cloud/windows-solarwinds-snap-agent/solarwinds-snap-agent.msi"
 swisnap_agent_product_id: "{DA33CD5D-DFF1-4AC5-B170-34B7F13D0CB6}"
+download_swisnap_win_installer: true
 
 swisnap_main_config_path: "C:\\ProgramData\\SolarWinds\\Snap\\config.yaml"
 swisnap_plugins_config: "C:\\ProgramData\\SolarWinds\\Snap\\plugins.d"

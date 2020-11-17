@@ -156,13 +156,18 @@ swisnap_custom_v1_task_path: ""
 swisnap_custom_v2_task_path: ""
 swisnap_custom_plugin_configs_path: ""
 ```
-Paths to directories with custom task and plugin configuration files. It allows users to configure additional plugins. It should be path to directory in format ``/path/to/directory/``
+Paths to directories with custom task and plugin configuration files. It allows users to configure additional plugins. It should be path to directory e.g. ``/path/to/directory``
 
 ```yaml
 swisnap_win_installer_download_path: ""
 ```
 Path to download Windows installer. It has to be configured by user before running the role on Windows platform
 
+```yaml
+swisnap_package_version: ""
+```
+
+Specific version of package to install e.g. `4.0.0.863` It works only for Linux platforms. For Windows always latest package is installed.
 
 ## Example Playbook
 
