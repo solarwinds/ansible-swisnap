@@ -163,6 +163,11 @@ swisnap_win_installer_download_path: ""
 ```
 Path to download Windows installer. It has to be configured by user before running the role on Windows platform
 
+```yaml
+swisnap_package_version: ""
+```
+
+Specific version of package to install e.g. `4.0.0.863` It works only for Linux platforms. For Windows always latest package is installed.
 
 ## Example Playbook
 

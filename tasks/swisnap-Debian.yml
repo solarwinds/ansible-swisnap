@@ -22,9 +22,19 @@
     state: present
   become: yes
 
-- name: Install Snap Agent dependencies
+- name: Set pacakge name to install version set
+  set_fact:
+    swisnap_package: "{{ swisnap_package_name }}={{ swisnap_package_version }}"
+  when: swisnap_package_version | length > 0
+
+- name: Set pacakge name to install version not set
+  set_fact:
+    swisnap_package: "{{ swisnap_package_name }}"
+  when: swisnap_package_version | length == 0
+
+- name: Install SolarWinds Snap Agent
   apt:
-    name: "{{ swisnap_package_name }}"
+    name: "{{ swisnap_package }}"
     state: present
     update_cache: yes
   become: yes
