@@ -79,7 +79,7 @@ Logging level, path to log file and log format.
 swisnap_plugin_trust_level: ""
 swisnap_keyring_paths: ""
 ```
-Plugin trust level for swisnapd. When enabled, only signed plugins that can be verified will be loaded into swisnapd. Signatures are verified from keyring files specified in swisnap_keyring_path. Valid values are 0 - Off, 1 - Enabled, 2 - Warning
+Plugin trust level for swisnapd. When enabled, only signed plugins that can be verified will be loaded into swisnapd. Signatures are verified from keyring files specified in swisnap_keyring_path. Valid values are 0 - Off, 1 - Enabled, 2 - Warning. Default value is 1 - Enabled. If this is not set, then agent will use default enabled level
 
 ```yaml
 swisnap_tls_cert_path: ""
