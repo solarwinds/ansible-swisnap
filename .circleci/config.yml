@@ -73,14 +73,6 @@ jobs:
     steps:
       - run_tests
 
-  centos6:
-    machine:
-      image: ubuntu-1604:201903-01
-    environment:
-      PLATFORM: centos:6
-    steps:
-      - run_tests
-
   centos7:
     machine:
       image: ubuntu-1604:201903-01
@@ -123,7 +115,6 @@ workflows:
       - ubuntu-xenial
       - ubuntu-bionic
       - ubuntu-focal
-      - centos6
       - centos7
       - centos8
       - amazonlinux1
