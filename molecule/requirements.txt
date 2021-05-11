@@ -1,5 +1,5 @@
 ansible
-ansible-lint==4.3.7
+ansible-lint
 black
 docker
 flake8
