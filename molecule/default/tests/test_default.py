@@ -33,7 +33,7 @@ def test_process_swisnapd(host):
     assert host.process.get(user=SOLARWINDS, comm=SWISNAPD)
     # checking default collector plugin: logs
     assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-col")) == 1
-    # checking defaul publisher plugin: publisher-appoptics
+    # checking default publisher plugin: publisher-appoptics
     assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-pub")) == 1
 
 
