@@ -12,7 +12,7 @@ platforms:
     command: /sbin/init
 lint: |
   set -e
-  yamllint -c molecule/yamllint-config.yaml .
+  yamllint .
   ansible-lint
   flake8 --max-line-length 160
   black --check .

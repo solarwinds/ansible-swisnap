@@ -31,10 +31,10 @@ def test_swinsapd_service(host):
 
 def test_process_swisnapd(host):
     assert host.process.get(user=SOLARWINDS, comm=SWISNAPD)
-    # checking default collector plugins: aosystem, processes, logs
-    assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-col")) == 3
-    # checking default publisher plugins: publisher-appoptics, publisher-processes
-    assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-pub")) == 2
+    # checking default collector plugin: logs
+    assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-col")) == 1
+    # checking default publisher plugin: publisher-appoptics
+    assert len(host.process.filter(user=SOLARWINDS, comm="snap-plugin-pub")) == 1
 
 
 def test_sockets(host, major_version):

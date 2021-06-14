@@ -4,6 +4,7 @@ galaxy_info:
   author: "support@solarwinds.com"
   description: SolarWinds Snap Agent Installer
   company: SolarWinds Inc.
+  namespace: solarwinds
   license: Apache2
   min_ansible_version: 2.1
   platforms:
@@ -13,6 +14,8 @@ galaxy_info:
         - xenial
         - bionic
         - focal
+        - groovy
+        - hirsute
     - name: Debian
       versions:
         - wheezy
