@@ -2,7 +2,7 @@
 - name: Check if OS is supported
   fail:
     msg: "The SolarWinds Snap Agent is not supporting your OS"
-  when: ansible_os_family not in ["RedHat", "Debian", "Windows"]
+  when: ansible_os_family not in ["RedHat", "Debian", "Windows" "AlmaLinux"]
 
 - name: Check RedHat/CentOS version
   fail:

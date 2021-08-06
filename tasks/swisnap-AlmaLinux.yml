@@ -1,0 +1,29 @@
+---
+- name: Set up package repository
+  yum_repository:
+    name: SolarWinds_snap-agent
+    file: /etc/yum.repos.d/SolarWinds_snap-agent
+    description: SolarWinds Snap Agent repository
+    baseurl: "{{ swisnap_repo_baseurl }}"
+    gpgkey: "{{ swisnap_repo_gpgkey }}"
+    gpgcheck: no
+    repo_gpgcheck: yes
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    metadata_expire: "{{ swisnap_repo_metadata_expire }}"
+  become: yes
+
+- name: Set package name to install selected version
+  set_fact:
+    swisnap_package: "{{ swisnap_package_name }}-{{ swisnap_package_version }}"
+  when: swisnap_package_version | length > 0
+
+- name: Set package name to install latest version
+  set_fact:
+    swisnap_package: "{{ swisnap_package_name }}"
+  when: swisnap_package_version | length == 0
+
+- name: Install SolarWinds Snap Agent
+  yum:
+    name: "{{ swisnap_package }}"
+    state: present
+  become: yes
