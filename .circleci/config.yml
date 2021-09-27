@@ -105,6 +105,14 @@ jobs:
     steps:
       - run_tests
 
+  almalinux:
+    machine:
+      image: almalinux:8.4
+    environment:
+      PLATFORM: almalinux:8 
+    steps:
+      - run_tests
+
 workflows:
   version: 2.1
   build_and_test:
@@ -119,3 +127,4 @@ workflows:
       - centos8
       - amazonlinux1
       - amazonlinux2
+      - almalinux
