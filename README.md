@@ -186,12 +186,12 @@ git clone https://github.com/solarwinds/ansible-swisnap.git solarwinds.swisnap
 ### Linux
 
 ```yaml
-  hosts: localhost
+- hosts: localhost
   connection: local
   vars_files:
     - vars/my_vars.yaml
   roles:
-    - ansible-swisnap
+    - solarwinds.swisnap
 ```
 
 Inside `vars/my_vars.yaml`:
@@ -207,7 +207,7 @@ solarwinds_token: 123456789dbba089e9ff613bb9528320188853b1a08d91d23d2fc9bc1c41ec
   vars_files:
     - vars/main.yml
   roles:
-    - ansible-swisnap
+    - solarwinds.swisnap
 ```
 
 Inside `vars/my_vars.yaml`:
