@@ -109,7 +109,7 @@ jobs:
     machine:
       image: almalinux:8.4
     environment:
-      PLATFORM: almalinux:8 
+      PLATFORM: almalinux:8
     steps:
       - run_tests
 
