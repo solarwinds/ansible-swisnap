@@ -2,7 +2,7 @@
 - name: Check if OS is supported
   fail:
     msg: "The SolarWinds Snap Agent is not supporting your OS"
-  when: ansible_os_family not in ["RedHat", "Debian", "Windows"]
+  when: ansible_os_family not in ["RedHat", "Debian", "Windows", "AlmaLinux"]
 
 - name: Check RedHat/CentOS version
   fail:
@@ -36,7 +36,7 @@
   set_fact:
     os_major_version: "{{ ansible_distribution_major_version }}"
   when:
-    - ansible_facts['os_family'] == "RedHat"
+    - ( ansible_facts['os_family'] == "RedHat" ) or ( ansible_facts['os_family'] == "AlmaLinux" )
 
 - name: set major version for Amazon Linux AMI
   set_fact:
