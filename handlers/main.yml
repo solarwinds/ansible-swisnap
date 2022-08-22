@@ -3,7 +3,7 @@
   ansible.builtin.service:
     name: "{{ swisnap_service }}"
     state: restarted
-  become: yes
+  become: true
 
 - name: Restart Windows service
   ansible.builtin.win_service:
