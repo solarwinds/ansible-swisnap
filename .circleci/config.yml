@@ -10,7 +10,7 @@ commands:
           name: "Install python 3.8.3"
           command: |
             git version
-            (cd $(pyenv root) && git pull)
+            (cd $(pyenv root) && git pull origin master)
             pyenv install 3.8.3
 
       - run:
