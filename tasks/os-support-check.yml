@@ -27,10 +27,10 @@
 
 - name: Check Ubuntu version
   fail:
-    msg: "Your Ubuntu version is not supported. The SolarWinds Snap Agent is supported from version 14.04 to 21.04"
+    msg: "Your Ubuntu version is not supported. The SolarWinds Snap Agent is supported from version 14.04 to 22.04"
   when:
     - ansible_distribution == "Ubuntu"
-    - ansible_distribution_major_version|int < 14 or ansible_distribution_major_version|int > 21
+    - ansible_distribution_major_version|int < 14 or ansible_distribution_major_version|int > 22
 
 - name: Set major version for RedHat/CentOS
   set_fact:
