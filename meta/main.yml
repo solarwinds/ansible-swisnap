@@ -16,6 +16,8 @@ galaxy_info:
         - focal
         - groovy
         - hirsute
+        - impish
+        - jammy
     - name: Debian
       versions:
         - wheezy
