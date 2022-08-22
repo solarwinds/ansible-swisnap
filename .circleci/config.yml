@@ -26,6 +26,12 @@ commands:
           command: molecule test --all
 
 jobs:
+  centos8-container:
+    docker:
+      - image: centos/centos8
+    steps:
+      - run: echo "1"
+
   debian8:
     machine:
       image: ubuntu-2004:current
