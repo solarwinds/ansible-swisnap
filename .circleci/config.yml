@@ -126,3 +126,4 @@ workflows:
       - centos8
       - amazonlinux1
       - amazonlinux2
+      - centos8-container
