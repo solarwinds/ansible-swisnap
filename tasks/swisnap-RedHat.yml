@@ -1,6 +1,6 @@
 ---
 - name: Set up package repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: SolarWinds_snap-agent
     file: /etc/yum.repos.d/SolarWinds_snap-agent
     description: SolarWinds Snap Agent repository
@@ -13,17 +13,17 @@
   become: yes
 
 - name: Set package name to install selected version
-  set_fact:
+  ansible.builtin.set_fact:
     swisnap_package: "{{ swisnap_package_name }}-{{ swisnap_package_version }}"
   when: swisnap_package_version | length > 0
 
 - name: Set package name to install latest version
-  set_fact:
+  ansible.builtin.set_fact:
     swisnap_package: "{{ swisnap_package_name }}"
   when: swisnap_package_version | length == 0
 
 - name: Install SolarWinds Snap Agent
-  yum:
+  ansible.builtin.yum:
     name: "{{ swisnap_package }}"
     state: present
   become: yes

@@ -1,6 +1,6 @@
 ---
 - name: Install apt dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - curl
       - gnupg
@@ -11,29 +11,29 @@
   become: yes
 
 - name: Add repository gpg key
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ swisnap_repo_gpgkey }}"
     state: present
   become: yes
 
 - name: Set up package repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ swisnap_deb_repo }}"
     state: present
   become: yes
 
 - name: Set package name to install selected version
-  set_fact:
+  ansible.builtin.set_fact:
     swisnap_package: "{{ swisnap_package_name }}={{ swisnap_package_version }}"
   when: swisnap_package_version | length > 0
 
 - name: Set package name to install latest version
-  set_fact:
+  ansible.builtin.set_fact:
     swisnap_package: "{{ swisnap_package_name }}"
   when: swisnap_package_version | length == 0
 
 - name: Install SolarWinds Snap Agent
-  apt:
+  ansible.builtin.apt:
     name: "{{ swisnap_package }}"
     state: present
     update_cache: yes
