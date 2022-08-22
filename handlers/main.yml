@@ -1,11 +1,11 @@
 ---
 - name: Restart Linux service
-  service:
+  ansible.builtin.service:
     name: "{{ swisnap_service }}"
     state: restarted
   become: yes
 
 - name: Restart Windows service
-  win_service:
+  ansible.builtin.win_service:
     name: "{{ swisnap_service }}"
     state: restarted
