@@ -28,7 +28,7 @@ commands:
 jobs:
   centos8-container:
     docker:
-      - image: centos/centos8
+      - image: centos:centos8
     steps:
       - run: echo "1"
 
