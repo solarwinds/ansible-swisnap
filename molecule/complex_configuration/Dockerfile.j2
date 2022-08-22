@@ -5,5 +5,5 @@ FROM {{ item.image }}
 {% endif %}
 
 RUN if [ $(command -v apt-get) ]; then apt-get update && apt-get install -y python sudo bash systemd systemd-sysv procps net-tools && apt-get clean; \
-    elif [ $(command -v dnf) ]; then dnf makecache && dnf --assumeyes install sudo python3 python3-devel python3-dnf python3-pip bash net-tools && dnf clean all; \
-    elif [ $(command -v yum) ]; then cd /etc/yum.repos.d/; sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*; sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*; yum makecache fast && yum install -y python sudo yum-plugin-ovl bash initscripts net-tools && sed -i 's/plugins=0/plugins=1/g' /etc/yum.conf && yum clean all; fi
+    elif [ $(command -v dnf) ]; then cd /etc/yum.repos.d/; sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*; sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*; dnf makecache && dnf --assumeyes install sudo python3 python3-devel python3-dnf python3-pip bash net-tools && dnf clean all; \
+    elif [ $(command -v yum) ]; then yum makecache fast && yum install -y python sudo yum-plugin-ovl bash initscripts net-tools && sed -i 's/plugins=0/plugins=1/g' /etc/yum.conf && yum clean all; fi
