@@ -1,2 +1,2 @@
 ---
-swisnap_deb_repo: "deb https://packagecloud.io/solarwinds/{{ swisnap_repo }}/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} main"
+swisnap_deb_repo: "deb https://packagecloud.io/solarwinds/{{ swisnap_repo }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} main"

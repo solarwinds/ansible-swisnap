@@ -1,6 +1,6 @@
 ---
 - name: Configure main config (Linux)
-  template:
+  ansible.builtin.template:
     src: config.yaml.j2
     dest: "{{ swisnap_main_config_path }}"
     owner: "{{ swisnap_user }}"
@@ -11,7 +11,7 @@
   when: ansible_os_family != "Windows"
 
 - name: Configure publisher AppOptics config file (Linux)
-  template:
+  ansible.builtin.template:
     src: publisher-appoptics.yaml.j2
     dest: "{{ swinsap_publisher_appoptics_path }}"
     owner: "{{ swisnap_user }}"
@@ -22,7 +22,7 @@
   when: ansible_os_family != "Windows"
 
 - name: Configure publisher processes config file (Linux)
-  template:
+  ansible.builtin.template:
     src: publisher-processes.yaml.j2
     dest: "{{ swinsap_processes_appoptics_path }}"
     owner: "{{ swisnap_user }}"
@@ -33,28 +33,28 @@
   when: ansible_os_family != "Windows"
 
 - name: Configure main config (Windows)
-  win_template:
+  ansible.builtin.win_template:
     src: config.yaml.j2
     dest: "{{ swisnap_main_config_path }}"
   notify: Restart Windows service
   when: ansible_os_family == "Windows"
 
 - name: Configure publisher AppOptics config file (Windows)
-  win_template:
+  ansible.builtin.win_template:
     src: publisher-appoptics.yaml.j2
     dest: "{{ swinsap_publisher_appoptics_path }}"
   notify: Restart Windows service
   when: ansible_os_family == "Windows"
 
 - name: Configure publisher processes config file (Windows)
-  win_template:
+  ansible.builtin.win_template:
     src: publisher-processes.yaml.j2
     dest: "{{ swinsap_processes_appoptics_path }}"
   notify: Restart Windows service
   when: ansible_os_family == "Windows"
 
 - name: Copy V1 tasks (Linux)
-  copy:
+  ansible.builtin.copy:
     src: "{{ swisnap_custom_v1_task_path }}/"
     dest: "{{ swisnap_task_path }}"
     owner: "{{ swisnap_user }}"
@@ -67,7 +67,7 @@
     - ansible_os_family != "Windows"
 
 - name: Copy V2 tasks (Linux)
-  copy:
+  ansible.builtin.copy:
     src: "{{ swisnap_custom_v2_task_path }}/"
     dest: "{{ swisnap_tasks_autoload_path }}"
     owner: "{{ swisnap_user }}"
@@ -80,7 +80,7 @@
     - ansible_os_family != "Windows"
 
 - name: Copy plugin configs (Linux)
-  copy:
+  ansible.builtin.copy:
     src: "{{ swisnap_custom_plugin_configs_path }}/"
     dest: "{{ swisnap_plugins_config }}"
     owner: "{{ swisnap_user }}"
@@ -93,7 +93,7 @@
     - ansible_os_family != "Windows"
 
 - name: Copy V1 tasks (Windows)
-  win_copy:
+  ansible.builtin.win_copy:
     src: "{{ swisnap_custom_v1_task_path }}/"
     dest: "{{ swisnap_task_path }}"
   notify: Restart Windows service
@@ -102,7 +102,7 @@
     - ansible_os_family == "Windows"
 
 - name: Copy V2 tasks (Windows)
-  win_copy:
+  ansible.builtin.win_copy:
     src: "{{ swisnap_custom_v2_task_path }}/"
     dest: "{{ swisnap_tasks_autoload_path }}"
   notify: Restart Windows service
@@ -111,7 +111,7 @@
     - ansible_os_family == "Windows"
 
 - name: Copy plugin configs (Windows)
-  win_copy:
+  ansible.builtin.win_copy:
     src: "{{ swisnap_custom_plugin_configs_path }}/"
     dest: "{{ swisnap_plugins_config }}"
   notify: Restart Windows service
