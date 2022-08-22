@@ -27,7 +27,7 @@ commands:
 jobs:
   debian8:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: debian:8
     steps:
@@ -35,7 +35,7 @@ jobs:
 
   debian9:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: debian:9
     steps:
@@ -43,7 +43,7 @@ jobs:
 
   debian10:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: debian:10
     steps:
@@ -51,7 +51,7 @@ jobs:
 
   ubuntu-xenial:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: ubuntu:xenial
     steps:
@@ -59,7 +59,7 @@ jobs:
 
   ubuntu-bionic:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: ubuntu:bionic
     steps:
@@ -67,7 +67,7 @@ jobs:
 
   ubuntu-focal:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: ubuntu:focal
     steps:
@@ -75,7 +75,7 @@ jobs:
 
   centos7:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: centos:7
     steps:
@@ -83,7 +83,7 @@ jobs:
 
   centos8:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: centos:8
     steps:
@@ -91,7 +91,7 @@ jobs:
 
   amazonlinux1:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: amazonlinux:1
     steps:
@@ -99,7 +99,7 @@ jobs:
 
   amazonlinux2:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: amazonlinux:2
     steps:
