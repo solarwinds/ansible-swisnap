@@ -1,44 +1,44 @@
 ---
 - name: Check if OS is supported
-  fail:
+  ansible.builtin.fail:
     msg: "The SolarWinds Snap Agent is not supporting your OS"
   when: ansible_os_family not in ["RedHat", "Debian", "Windows"]
 
 - name: Check RedHat/CentOS version
-  fail:
+  ansible.builtin.fail:
     msg: "Your RedHat/CentOS version is not supported. The SolarWinds Snap Agent is supported on RHEL6, RHEL7, RHEL8 and corresponding CentOS versions"
   when:
     - ansible_os_family == "RedHat" and ansible_distribution != "Amazon" and ansible_distribution != "OracleLinux"
     - ansible_distribution_major_version|int < 6 or ansible_distribution_major_version|int > 8
 
 - name: Check Debian version
-  fail:
+  ansible.builtin.fail:
     msg: "Your Debian version is not supported. The SolarWinds Snap Agent is supported on Debian from version 7.0 to 11.0"
   when:
     - ansible_distribution == "Debian"
     - ansible_distribution_major_version|int < 7 or ansible_distribution_major_version|int > 11
 
 - name: Check Oracle Linux version
-  fail:
+  ansible.builtin.fail:
     msg: "Your Oracle Linux version is not supported. The SolarWinds Snap Agent is supported from version 6 and 7"
   when:
     - ansible_distribution == "OracleLinux"
     - ansible_distribution_major_version|int < 6 or ansible_distribution_major_version|int > 7
 
 - name: Check Ubuntu version
-  fail:
-    msg: "Your Ubuntu version is not supported. The SolarWinds Snap Agent is supported from version 14.04 to 21.04"
+  ansible.builtin.fail:
+    msg: "Your Ubuntu version is not supported. The SolarWinds Snap Agent is supported from version 14.04 to 22.04"
   when:
     - ansible_distribution == "Ubuntu"
-    - ansible_distribution_major_version|int < 14 or ansible_distribution_major_version|int > 21
+    - ansible_distribution_major_version|int < 14 or ansible_distribution_major_version|int > 22
 
 - name: Set major version for RedHat/CentOS
-  set_fact:
+  ansible.builtin.set_fact:
     os_major_version: "{{ ansible_distribution_major_version }}"
   when:
     - ansible_facts['os_family'] == "RedHat"
 
 - name: set major version for Amazon Linux AMI
-  set_fact:
+  ansible.builtin.set_fact:
     os_major_version: "8"
   when: ansible_distribution == "Amazon"

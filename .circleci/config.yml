@@ -9,7 +9,8 @@ commands:
       - run:
           name: "Install python 3.8.3"
           command: |
-            (cd $(pyenv root) && git pull)
+            git version
+            (cd $(pyenv root) && git pull origin master)
             pyenv install 3.8.3
 
       - run:
@@ -25,9 +26,15 @@ commands:
           command: molecule test --all
 
 jobs:
+  centos8-container:
+    docker:
+      - image: centos:centos8
+    steps:
+      - run: echo "1"
+
   debian8:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: debian:8
     steps:
@@ -35,7 +42,7 @@ jobs:
 
   debian9:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: debian:9
     steps:
@@ -43,7 +50,7 @@ jobs:
 
   debian10:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: debian:10
     steps:
@@ -51,7 +58,7 @@ jobs:
 
   ubuntu-xenial:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: ubuntu:xenial
     steps:
@@ -59,7 +66,7 @@ jobs:
 
   ubuntu-bionic:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: ubuntu:bionic
     steps:
@@ -67,7 +74,7 @@ jobs:
 
   ubuntu-focal:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: ubuntu:focal
     steps:
@@ -75,7 +82,7 @@ jobs:
 
   centos7:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: centos:7
     steps:
@@ -83,7 +90,7 @@ jobs:
 
   centos8:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: centos:8
     steps:
@@ -91,7 +98,7 @@ jobs:
 
   amazonlinux1:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: amazonlinux:1
     steps:
@@ -99,7 +106,7 @@ jobs:
 
   amazonlinux2:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2004:current
     environment:
       PLATFORM: amazonlinux:2
     steps:

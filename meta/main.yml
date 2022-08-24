@@ -6,7 +6,7 @@ galaxy_info:
   company: SolarWinds Inc.
   namespace: solarwinds
   license: Apache2
-  min_ansible_version: 2.1
+  min_ansible_version: "2.1"
   platforms:
     - name: Ubuntu
       versions:
@@ -16,6 +16,8 @@ galaxy_info:
         - focal
         - groovy
         - hirsute
+        - impish
+        - jammy
     - name: Debian
       versions:
         - wheezy
@@ -25,16 +27,16 @@ galaxy_info:
         - bullseye
     - name: EL
       versions:
-        - 6
-        - 7
-        - 8
+        - "6"
+        - "7"
+        - "8"
     - name: Windows
       versions:
         - 2008R2
-        - 2012
+        - "2012"
         - 2012R2
-        - 2016
-        - 2019
+        - "2016"
+        - "2019"
   galaxy_tags:
     - monitoring
 
